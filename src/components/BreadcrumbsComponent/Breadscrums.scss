@@ -1,0 +1,35 @@
+.main-content .breadcrumb {
+    margin-bottom: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.breadcrumb-item{
+    a{
+        color: #3B3E66;
+        font-weight: 600;
+
+    }
+    &.active{
+        a{
+            color: #f4772e;
+        }
+    }
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    content: "\f105" !important;
+    color: #6c757d;
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+}
+
+.breadcrumb-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 0;
+    padding: 10px 20px;
+    margin: -20px -20px 0px;
+}

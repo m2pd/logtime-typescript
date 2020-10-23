@@ -1,0 +1,53 @@
+@import '../../../../App.scss';
+
+.login-page {
+    height: 100vh;
+    background-image: url(../../../../assets/images/login-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: calc(100% - 450px) 100vh;
+    position: relative;
+    object-fit: cover;
+
+    /* z-index: 20; */
+    .box-login {
+        width: 560px;
+        height: 100%;
+        padding: 2rem;
+        text-align: center;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        box-shadow: 0 15px 50px rgba(47, 72, 113, 1);
+    }
+
+    .box__info img {
+        width: 30%;
+
+    }
+
+    .box__title {
+        color: $color-primary
+    }
+
+    .box__description {
+        margin: 1rem 0;
+        font-size: .95rem;
+    }
+
+    .field {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .custom-flex {
+        display: flex;
+        align-items: center;
+    }
+
+}
