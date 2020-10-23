@@ -1,6 +1,6 @@
 import { Box, createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import React, { useState } from 'react';
+import React from 'react';
 // import { fetchUserAuthRequest } from '../../../../redux/actions/userAuthActions';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -9,8 +9,6 @@ import logo from '../../../../assets/images/logo-mitech.png';
 import { login } from '../../../../redux/actions/authAction';
 import LoginForm, { MyFormValues } from '../../components/LoginForm';
 import './Main.scss';
-
-
 
 const theme = createMuiTheme({
   // overrides: {
@@ -46,24 +44,25 @@ const initialValues:MyFormValues = {
 
 function MainLoginPage(props:IProps) {
 
-  const [loading, setLoading] = useState(false)
   const {isLoggedIn} = props;
 
   if(isLoggedIn){
     return <Redirect to="/account" />;
   }
 
-  const handleSubmit = (values:any) => {
+  const handleSubmit = (values:any,actions:any) => {
     console.log('Form Submit:', values);
+    console.log('action Submit:', actions);
     const { dispatch, history } = props;
-    setLoading(true)
     dispatch(login(values))
     .then(() => {
       history.push('/dashboard');
       // window.location.reload();
     })
     .catch(() => {
-      setLoading(false)      
+      setTimeout(() => {
+        actions.setSubmitting(false)
+      }, 2000);
     })
     
     

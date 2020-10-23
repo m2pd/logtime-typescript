@@ -6,9 +6,11 @@ interface PropsInputField {
   type: string;
   label: string;
   size:string;
+  disabled:boolean;
+  variant?:string;
 }
 function InputField(props: PropsInputField) {
-  const { field, type, label,size }: any = props;
+  const { field, type, label,size,disabled,variant }: any = props;
   const { name }: any = field;
   //field have name, vale, onChange, onBlur
   return (
@@ -19,11 +21,16 @@ function InputField(props: PropsInputField) {
       name={name}
       type={type}
       size={size}
-      variant='outlined'
+      variant={variant}
       className='field'
-      fullWidth 
+      fullWidth
+      disabled={disabled} 
     />
   );
+}
+
+InputField.defaultProps = {
+  variant:"outlined"
 }
 
 export default InputField;

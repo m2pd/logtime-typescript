@@ -1,6 +1,7 @@
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import { FastField, Form, Formik } from 'formik';
 import React from 'react';
+import LoadingIcon from '../../../../components/LoadingIcon';
 import InputField from '../../../../custom-field/InputFiled';
 
 export interface MyFormValues {
@@ -22,7 +23,7 @@ const LoginForm: React.FC<IProps> = (props) => {
       <Formik enableReinitialize  initialValues={initialValues} onSubmit={onSubmit}>
         {(formikProps) => {
           //do somthing here
-          // const { values, errors, touched, isSubmitting } = formikProps;
+          const { values, errors, touched, isSubmitting } = formikProps;
           // console.log({ values, errors, touched });
           return (
             <Form className='page-form'>
@@ -41,6 +42,7 @@ const LoginForm: React.FC<IProps> = (props) => {
                 variant='outlined'
               />
               <Button type='submit' variant='outlined' color='primary'>
+              {isSubmitting ? <LoadingIcon size={20} color="secondary" /> : ""}
                 Đăng nhập
               </Button>
             </Form>

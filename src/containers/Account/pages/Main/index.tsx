@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { AnyIfEmpty, connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import HeaderIntro from '../../../../components/HeaderIntro';
 import { logout } from '../../../../redux/actions/authAction';
 import { getUser, updateUser } from '../../../../redux/actions/userAction';
 import { MainComponent } from '../../../Main';
 import AccountForm from '../../components/AccountForm';
+import swal from 'sweetalert';
+
 
 export interface UserCurrent{
   fullName:string;
@@ -58,23 +59,22 @@ function MainAccountPage(props: IProps) {
     userRoles:[]
   })
 
-  useEffect(() => {
-    console.log("START")
-    props.getUser(id)
-    .then(() => {
-      setUserCurrent(currentUser);
-    })
-  }, [id])
-
-  // if(!user){
-  //   return <Redirect to="/login" />;
-  // }
+  // useEffect(() => {
+  //   console.log("START")
+  //   props.getUser(id)
+  //   .then(() => {
+  //     setUserCurrent(currentUser);
+  //   })
+  // }, [id])
 
   const onLogout = () =>{
     props.logout();
   }
 
-  const onEdit = (values:any):void  =>{
+  const onEdit = (values:any, actions:any):void  =>{
+    //Cancel submit status
+    actions.setSubmitting(false);
+
     const data = Object.assign({},infoUser,{
       fullName: values.fullName,
       phoneNumber: values.phoneNumber,
@@ -82,28 +82,37 @@ function MainAccountPage(props: IProps) {
       roles:values.userRoles
     })
 
-    props.updateUser(idUser, data)
-    .then(() => {
-      history.push('/dashboard');
-      toast.success("Câp nhật thành công !", {
-        position: toast.POSITION.TOP_LEFT
+    swal({
+    title: "Có chắc là muốn sữa không?",
+    text: "Chắc rồi thì nhấn OK đi",
+    icon: "warning",
+    buttons:  ["Thôi, không sửa nữa đâu!", "OK nè !"],
+    dangerMode: true,
+  })
+  .then((willUpdate) => {
+    if (willUpdate) {
+      actions.setSubmitting(true);
+      props.updateUser(idUser, data)
+      .then(() => {
+        history.push('/dashboard');
+        // toast.success("Câp nhật thành công !", {
+        //   position: toast.POSITION.TOP_LEFT
+        // });
+        // window.location.reload();
+      })
+      .catch(() =>{
+        // toast.error("Câp nhật không thành công !", {
+        //   position: toast.POSITION.TOP_LEFT
+        // });
+      })
+      swal("Cập nhật thành công", {
+        icon: "success",
       });
-      // window.location.reload();
-    })
-    .catch(() =>{
-      toast.error("Câp nhật không thành công !", {
-        position: toast.POSITION.TOP_LEFT
-      });
-    })
-
-    console.log(data)
-    
+    } else {
+      swal("Suy nghĩ kĩ rồi mới sữa nghen <3");
+    }
+  });    
   }
-
-
-  console.log("END")
-  console.log(userCurrent)
-
 
   return (
     <div >
@@ -118,18 +127,6 @@ function MainAccountPage(props: IProps) {
               initialValues={props.currentUser}
               onSubmit={onEdit}
             />
-            {/* <br />
-            <hr />
-            
-            MainAccountPage
-            <h1>Tên: {infoUser.fullName} </h1>
-            <p>{infoUser.email}</p>
-            <p>{currentUser.phoneNumber}</p>
-            <p>{currentUser.team}</p>
-            <p>{currentUser.userName}</p> */}
-            
-            <button onClick={onLogout}>Đăng xuất</button>
-            <button onClick={onEdit}>Cập nhật</button>
           </div>
       </MainComponent>
   </div>

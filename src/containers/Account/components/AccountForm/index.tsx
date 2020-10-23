@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Box, Button, CircularProgress } from '@material-ui/core';
 import { Formik , Form, FastField} from 'formik';
 import React, { useState,useEffect } from 'react';
 import InputField from '../../../../custom-field/InputFiled';
@@ -23,6 +23,8 @@ const AccountForm: React.FC<IProps> = (props) =>{
 																type="text"
 																component={InputField}
 																size="small"
+																disabled={true}
+																variant='filled'
 														/>
 														<FastField
 																name="email"
@@ -53,6 +55,7 @@ const AccountForm: React.FC<IProps> = (props) =>{
 																size="small"
 														/>
 														<Button type='submit' variant='outlined' color='primary'>
+															{isSubmitting ? <Box mr={1}><CircularProgress size={20} color="secondary" /></Box> : ""}
 															Cập nhật
 														</Button>
 												</Form>

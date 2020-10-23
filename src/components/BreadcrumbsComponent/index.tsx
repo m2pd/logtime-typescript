@@ -1,12 +1,12 @@
-import React from 'react';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {connect} from 'react-redux';
-import './Breadscrums.scss';
 import { logout } from '../../redux/actions/authAction';
+import './Breadscrums.scss';
 
 interface IProps {
   user: any;
