@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
+import LoadingComponent from './components/LoadingComponent';
 import NotFound from './components/NotFound';
 
 const LoginPage = React.lazy(() => import('./containers/Login'));
@@ -12,7 +13,7 @@ const DashBoard = React.lazy(() => import('./containers/DashBoard'));
 function App() {
   return (
     <div className='App'>
-      <React.Suspense fallback={<div>Loading ...</div>}>
+      <React.Suspense fallback={<LoadingComponent />}>
       <ToastContainer />
         <BrowserRouter>
           <Switch>

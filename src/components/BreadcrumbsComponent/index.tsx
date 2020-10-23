@@ -36,18 +36,18 @@ const BreadcrumbsComponent = (props:IProps) => {
     return (
     <div className="breadcrumb-content"> 
       <Breadcrumbs separator="›" aria-label="breadcrumb">
-            <Link onClick={() => history.push("/")}>Home</Link>
+            <Link className="breadcrumb-item" onClick={() => history.push("/dashboard")}>Home</Link>
         {
             pathnames.map((name:string,index:number) =>{
                 const routeTo = `/${pathnames.slice(0,index + 1).join("/")}`;
                 const isLast = index === pathnames.length - 1;
                 return isLast 
                 ?   
-                        <Link key={index} color="inherit" onClick={() => history.push(routeTo)}>{name}</Link>
+                        <Link className="breadcrumb-item active" key={index} color="textPrimary" onClick={() => history.push(routeTo)}>{name}</Link>
                     
                 : (
                     
-                        <Link key={index} color="textPrimary" onClick={() => history.push(routeTo)}>{name}</Link>
+                        <Link className="breadcrumb-item" key={index}  color="inherit" onClick={() => history.push(routeTo)}>{name}</Link>
                     
                     )
             })

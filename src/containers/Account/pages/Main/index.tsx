@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { toast } from 'react-toastify';
+import swal from 'sweetalert';
 import HeaderIntro from '../../../../components/HeaderIntro';
 import { logout } from '../../../../redux/actions/authAction';
 import { getUser, updateUser } from '../../../../redux/actions/userAction';
 import { MainComponent } from '../../../Main';
 import AccountForm from '../../components/AccountForm';
-import swal from 'sweetalert';
 
 
 export interface UserCurrent{
@@ -42,22 +41,22 @@ interface IProps{
 
 
 function MainAccountPage(props: IProps) {
-  const {user, currentUser,history} = props;
+  // const {user, currentUser,history} = props;
+  const {history} = props;
 
   const infoUser = JSON.parse(localStorage.getItem('currentUser') || "{}");
-  console.log(infoUser)
   const idUser = +infoUser.id
-  console.log(idUser)
 
-  const [id, setId] = useState(idUser)
-  const [userCurrent, setUserCurrent] = useState<UserCurrent>({
-    email:"",
-    fullName:"",
-    phoneNumber:"",
-    userName:"",
-    team:"",
-    userRoles:[]
-  })
+  //---------------- START Get values from API -----------------
+  // const [id, setId] = useState(idUser)
+  // const [userCurrent, setUserCurrent] = useState<UserCurrent>({
+  //   email:"",
+  //   fullName:"",
+  //   phoneNumber:"",
+  //   userName:"",
+  //   team:"",
+  //   userRoles:[]
+  // })
 
   // useEffect(() => {
   //   console.log("START")
@@ -66,10 +65,7 @@ function MainAccountPage(props: IProps) {
   //     setUserCurrent(currentUser);
   //   })
   // }, [id])
-
-  const onLogout = () =>{
-    props.logout();
-  }
+  //---------------- END Get values from API -----------------
 
   const onEdit = (values:any, actions:any):void  =>{
     //Cancel submit status
@@ -120,6 +116,7 @@ function MainAccountPage(props: IProps) {
           <HeaderIntro
             title='Tài khoản'
             intro='Trang thông tin tài khoản'
+            isButtonAdd={false}
           />
           <div className="page-content">
               

@@ -5,15 +5,12 @@
 }
 
 .breadcrumb-item{
-    a{
-        color: #3B3E66;
-        font-weight: 600;
-
-    }
+    cursor: pointer;
+    color: #3B3E66;
+    font-weight: 600;
+    
     &.active{
-        a{
-            color: #f4772e;
-        }
+        color: #f4772e;
     }
 }
 

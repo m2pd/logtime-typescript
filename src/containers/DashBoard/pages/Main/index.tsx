@@ -7,8 +7,8 @@ const MainDashBoardPage: React.FC<IProps> = (props) =>{
     <div>
       <MainComponent>
           <HeaderIntro
-            title='Tài khoản'
-            intro='Trang thông tin tài khoản'
+            title='Trang quản trị'
+            intro='Chào mừng các bạn đến với MITECH WORKPLACE'
           />
           <div className="page-content">
             <h1>MainDashBoardPage</h1>

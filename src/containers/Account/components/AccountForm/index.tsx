@@ -1,8 +1,8 @@
-import { Box, Button, CircularProgress } from '@material-ui/core';
-import { Formik , Form, FastField} from 'formik';
-import React, { useState,useEffect } from 'react';
+import { Button } from '@material-ui/core';
+import { FastField, Form, Formik } from 'formik';
+import React from 'react';
+import { connect } from 'react-redux';
 import InputField from '../../../../custom-field/InputFiled';
-import {connect} from 'react-redux';
 import './AccountForm.scss';
 // import { InitialValues } from '../../pages/Main'
 
@@ -14,7 +14,9 @@ const AccountForm: React.FC<IProps> = (props) =>{
 				<div>
 						<Formik initialValues = {initialValues} onSubmit={onSubmit}>
 								{(formikProps) => {
-										const {values, errors, touched, isSubmitting} = formikProps;
+										//Default formikProps have : values, errors, touched, isSubmitting
+										// const {values, errors, touched, isSubmitting} = formikProps;
+										// const {values, errors, touched, isSubmitting} = formikProps;
 										return(
 												<Form className='page-form account-page-form'>
 														<FastField
@@ -55,7 +57,6 @@ const AccountForm: React.FC<IProps> = (props) =>{
 																size="small"
 														/>
 														<Button type='submit' variant='outlined' color='primary'>
-															{isSubmitting ? <Box mr={1}><CircularProgress size={20} color="secondary" /></Box> : ""}
 															Cập nhật
 														</Button>
 												</Form>

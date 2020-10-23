@@ -1,4 +1,4 @@
-import { Button, CircularProgress } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { FastField, Form, Formik } from 'formik';
 import React from 'react';
 import LoadingIcon from '../../../../components/LoadingIcon';
@@ -23,8 +23,10 @@ const LoginForm: React.FC<IProps> = (props) => {
       <Formik enableReinitialize  initialValues={initialValues} onSubmit={onSubmit}>
         {(formikProps) => {
           //do somthing here
-          const { values, errors, touched, isSubmitting } = formikProps;
-          // console.log({ values, errors, touched });
+          //Default formikProps have : values, errors, touched, isSubmitting
+          // const { values, errors, touched, isSubmitting } = formikProps;
+          const { isSubmitting } = formikProps;
+          
           return (
             <Form className='page-form'>
               <FastField
