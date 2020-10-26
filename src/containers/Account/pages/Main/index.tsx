@@ -9,6 +9,7 @@ import AccountForm from '../../components/AccountForm';
 
 
 export interface UserCurrent{
+  id:number;
   fullName:string;
   email:string;
   phoneNumber:string;

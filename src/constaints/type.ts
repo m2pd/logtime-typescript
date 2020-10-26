@@ -1,4 +1,5 @@
 import { GetUser, UpdateUser } from './../redux/actions/userAction';
+
 import {
   ClearMessageAction,
   SetMessageAction,
@@ -10,6 +11,8 @@ import {
   LogoutAction,
 } from './../redux/actions/authAction';
 
+import { GetLogTime } from '../redux/actions/logtimeAction';
+
 export enum ActionTypes {
   loginSuccess,
   loginFail,
@@ -17,6 +20,8 @@ export enum ActionTypes {
 
   getUser,
   updateUser,
+
+  getLogtime,
 
   setMessage,
   clearMessage,
@@ -29,4 +34,5 @@ export type Action =
   | LoginFailAction
   | LogoutAction
   | UpdateUser
-  | GetUser;
+  | GetUser
+  | GetLogTime ;
