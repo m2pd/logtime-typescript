@@ -1,0 +1,139 @@
+.logtime-list .MuiTableCell-root{
+    word-break: break-word;
+    font-family: 'Poppins';
+
+    &:nth-of-type(1){
+        width: 70px;
+    }
+
+    &:nth-of-type(2){
+        width: 70px;
+    }
+
+    &:nth-of-type(3){
+        width: 70px;
+    }
+
+    &:nth-of-type(5){
+        width: 100px;
+    }
+
+    &:nth-of-type(4),
+    &:nth-of-type(6){
+        width: 200px;
+    }
+
+}
+
+.MuiTable-root{
+    th.MuiTableCell-root{
+        background-color: #3c44b1;
+        color:#fff;
+    }
+}
+
+.MuiToolbar-regular .MuiTypography-h6{
+    background-color: #fafafe;
+    color: #3b3e66;
+    font-weight: 600;
+}
+
+.MuiToolbar-regular {
+    background-color: #fafafe;
+}
+
+.MuiButton-root.btn-operation{
+    padding: 8px 10px;
+    min-width: 20px;
+}
+
+.MuiButton-root.btn-operation--delete{
+    margin-right: 10px;
+}
+
+.btn-operation .MuiButton-startIcon {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.table-info{
+  margin: 0 -20px 50px;
+  .badge {
+      padding:6px;
+      font-size: 80%;
+  }
+
+  .rdt_TableCell,
+  .rdt_TableCol{
+
+      &:nth-of-type(1){
+          flex: 0 0 7%;
+          min-width: 7%;
+      }
+
+      &:nth-of-type(2){
+          flex: 0 0 10%;
+          min-width: 10%;
+      }
+
+      &:nth-of-type(3){
+          flex: 0 0 8%;
+          min-width: 8%;
+      }
+
+      &:nth-of-type(4){
+          flex: 0 0 15%;
+          min-width: 15%;
+      }
+      
+      &:nth-of-type(6){
+          flex: 0 0 20%;
+          min-width: 20%;
+      }
+
+      &:nth-of-type(5){
+          min-width: 11%;
+      }
+
+      &:nth-of-type(9){
+          min-width: 11%;
+
+          .group-overview{
+              white-space: nowrap;
+          }
+      }
+
+  }
+
+  .rdt_TableCell{
+      padding:8px 16px;
+      -webkit-align-items: flex-start;
+      -webkit-box-align: flex-start;
+      -ms-flex-align: flex-start;
+      align-items: flex-start;
+
+      div:first-child{
+          white-space: pre-wrap;
+      }
+  }
+
+  .filter-table{
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      align-items: center;
+  }
+  
+}
+
+// @media only screen and (max-width:1400px){
+//     .table-info{
+//         .rdt_TableCell,
+//         .rdt_TableCol{
+//             &:nth-of-type(1){
+//                 flex: 0 0 5%;
+//                 min-width: 5%;
+//             }
+//         }
+//     }
+// }

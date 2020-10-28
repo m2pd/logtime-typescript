@@ -6,11 +6,14 @@ import { getLogtime } from '../../../../redux/actions/logtimeAction'
 import { LogtimeCurrent } from '../../../../redux/reducers/logtimeReducer'
 import { UserCurrent } from '../../../Account/pages/Main'
 import { MainComponent } from '../../../Main'
+import TimeSheetForm from '../../components/TimeSheetForm'
+import TimeSheetList from '../../components/TimeSheetList'
 
 function MainLoginPage(props:IProps) {
     const {currentUser:{id}, logtime} = props;
     //FromDate, ToDate have type are string or Date (* Date)
-    const FromDate:any = dayjs().day(1).format('YYYY-MM-DD');
+    // const FromDate:any = dayjs().day(1).format('YYYY-MM-DD');
+    const FromDate:any = '2020-10-01';
     const ToDate:any = dayjs().day(6).format('YYYY-MM-DD');
 
     const dispatch = useDispatch(); 
@@ -27,6 +30,20 @@ function MainLoginPage(props:IProps) {
     useEffect(() => {
         onFetchLogtime();
     }, [onFetchLogtime])
+
+    const handleTimeSheetEditClick = (sheet:any) =>{
+        console.log(sheet)
+    }
+    const handleTimeSheetViewDetailsClick = (sheet:any) =>{
+        console.log(sheet)
+    }
+    const handleTimeSheetBlockClick = (sheet:any) =>{
+        console.log(sheet)
+    }
+    const handleTimeSheetRemoveClick = (sheet:any) =>{
+        console.log(sheet)
+    }
+
     return (
         <div>
             <MainComponent>
@@ -34,8 +51,12 @@ function MainLoginPage(props:IProps) {
                         title='Danh sách time sheet'
                         intro='Trang thông tin danh sách các công việc time sheet'
                     />
-                    <div className="page-content">   
-                        <h1>MainTimesheet Page</h1>
+                    <div className="page-content">
+                        <TimeSheetForm />
+                        <TimeSheetList
+                            data={logtime}
+                        />
+
                     </div>     
             </MainComponent>
         </div>
