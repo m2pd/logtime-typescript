@@ -164,11 +164,14 @@ const TimeSheetList:React.FC<IProps> = (props) => {
     filterType: 'dropdown',
     selectableRows:false,
     responsive: "scroll",
-    fixedHeader: true
+    fixedHeader: true,
+    onDownload: (buildHead:any, buildBody:any, columns:any, data:any) => {
+      return "\uFEFF" + buildHead(columns) + buildBody(data); 
+    } 
   };
   
   return(
-    <div style={{ height:'400px', width: '100%' }} className="logtime-list">
+    <div style={{  width: '100%' }} className="logtime-list">
       <MUIDataTable
         title={"Các bạn nhớ logtime mỗi ngày nha ❤️"}
         data={data.logtimeCurrent}

@@ -1,13 +1,91 @@
-import React from 'react'
-import './TimeSheetForm.scss'
-interface IProps{}
+import { Button } from '@material-ui/core';
+import { FastField, Form, Formik } from 'formik';
+import React from 'react';
+import { connect } from 'react-redux';
+import InputFieldOnChange from '../../../../custom-field/InputFieldOnChange';
+import SelectField from '../../../../custom-field/SelectField';
+import { parseListUsers } from '../../../../utils/parseListUsers';
+import { UserCurrent } from '../../../Account/pages/Main';
+import './TimeSheetForm.scss';
+
+interface IProps{
+  FromDate:string;
+  ToDate:string;
+  onSubmit:any;
+  id:number;
+}
+
+interface initialValues{
+  FromDate:string,
+  ToDate:string,
+  id:number;
+}
+
 
 const TimeSheetForm:React.FC<IProps> = props =>{
+  const {FromDate, ToDate, id, onSubmit}:IProps = props;
+  const {users}:any = props;
+  const listUser:UserCurrent[] = users.users;
+  
+  const initialValues:initialValues ={
+    FromDate: FromDate,
+    ToDate: ToDate,
+    id:id,
+  }
+  
+  const optionsValueUsers = parseListUsers(listUser)
+
   return(
-    <div>
-      TimeSheetForm
+    <div className="timesheet-form">
+      <Formik initialValues={initialValues} onSubmit={onSubmit} >
+        {(formikProps) => {
+          //Default formikProps have : values, errors, touched, isSubmitting
+
+          return(
+            <Form>
+              <FastField
+                className="timesheet-item"
+                name="FromDate"
+                label="Từ ngày"
+                type="date"
+                component={InputFieldOnChange}
+                size="small"
+              />
+
+              <FastField
+                className="timesheet-item"
+                name="ToDate"
+                label="Từ ngày"
+                type="date"
+                component={InputFieldOnChange}
+                size="small"
+              />
+
+              <FastField
+                name="id"
+                className="timesheet-item select-field"
+                component={SelectField}
+
+                label="Nhân viên"
+                placeholder='Chọn hoạt động ???'
+                options={optionsValueUsers}
+              />
+
+              <Button type='submit' variant='outlined' color='primary'>
+                Cập nhật
+              </Button>
+            </Form>
+          )
+        }}
+      </Formik>
     </div>
   )
 }
 
-export default TimeSheetForm;
+const mapStateToProps = (state:any) => {
+  return{
+    users: state.users
+  }
+}
+
+export default connect(mapStateToProps)(TimeSheetForm);

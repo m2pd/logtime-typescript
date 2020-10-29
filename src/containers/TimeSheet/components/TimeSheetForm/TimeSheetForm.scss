@@ -1,0 +1,17 @@
+.timesheet-form form{
+  display: flex;
+  justify-content: space-between;
+
+  .MuiFormControl-root,
+  #id{
+    flex: 0 0 25%
+  }
+
+  #id{
+    z-index: 9999;
+  }
+}
+
+.total{
+  margin: 1rem 0;
+}

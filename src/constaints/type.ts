@@ -1,4 +1,4 @@
-import { GetUser, UpdateUser } from './../redux/actions/userAction';
+import { GetUser,GetAllUsers, UpdateUser } from './../redux/actions/userAction';
 
 import {
   ClearMessageAction,
@@ -19,6 +19,7 @@ export enum ActionTypes {
   logout,
 
   getUser,
+  getAllUser,
   updateUser,
 
   getLogtime,
@@ -35,4 +36,5 @@ export type Action =
   | LogoutAction
   | UpdateUser
   | GetUser
+  | GetAllUsers
   | GetLogTime ;

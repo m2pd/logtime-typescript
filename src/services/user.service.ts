@@ -19,7 +19,13 @@ class UserService {
     return axios.put(`${API_ENDPOINT}api/Users/${id}`, JSON.stringify(data),{
       headers: authHeader(),
     })
-}
+  }
+
+  getAllUsers(){
+    return axios.get(`${API_ENDPOINT}api/Users`, {
+      headers: authHeader()
+    })
+  }
 }
 
 
