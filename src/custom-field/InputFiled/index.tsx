@@ -7,10 +7,11 @@ interface PropsInputField {
   label: string;
   size:string;
   disabled:boolean;
+  min?:number;
   variant?:string;
 }
 function InputField(props: PropsInputField) {
-  const { field, type, label,size,disabled,variant }: any = props;
+  const { field, type, label,size,disabled,variant, min }: any = props;
   const { name }: any = field;
   //field have name, vale, onChange, onBlur
   return (
@@ -23,6 +24,7 @@ function InputField(props: PropsInputField) {
       size={size}
       variant={variant}
       className='field'
+      min={min}
       fullWidth
       disabled={disabled} 
     />

@@ -8,10 +8,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import parseActionLogtime from '../../../../utils/parseActionLogtime'
 
-
-
-
-
 interface IProps{
   data:any;
   // onTimeSheetEditClick:Function;
@@ -165,6 +161,11 @@ const TimeSheetList:React.FC<IProps> = (props) => {
     selectableRows:false,
     responsive: "scroll",
     fixedHeader: true,
+    textLabels: {
+      body: {
+        noMatch: 'Không tìm thấy kết quả'
+      }
+    },
     onDownload: (buildHead:any, buildBody:any, columns:any, data:any) => {
       return "\uFEFF" + buildHead(columns) + buildBody(data); 
     } 

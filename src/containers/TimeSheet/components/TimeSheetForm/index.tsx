@@ -55,7 +55,7 @@ const TimeSheetForm:React.FC<IProps> = props =>{
               <FastField
                 className="timesheet-item"
                 name="ToDate"
-                label="Từ ngày"
+                label="Đến ngày"
                 type="date"
                 component={InputFieldOnChange}
                 size="small"

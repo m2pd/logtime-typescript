@@ -7,11 +7,13 @@ interface PropsInputFieldOnChange {
   label: string;
   size:string;
   disabled:boolean;
+  required:boolean;
   variant?:string;
+  fullWidth?:boolean;
 }
 
 function InputFieldOnChange(props: PropsInputFieldOnChange) {
-  const { field, type, label,size,disabled,variant }: any = props;
+  const { field, type, label,size,disabled,variant, fullWidth,required }: any = props;
   const { name }: any = field;
   //field have name, vale, onChange, onBlur
   return (
@@ -24,8 +26,9 @@ function InputFieldOnChange(props: PropsInputFieldOnChange) {
       size={size}
       variant={variant}
       className='field'
-      fullWidth
+      fullWidth={fullWidth}
       disabled={disabled} 
+      required={required} 
     />
   );
 }
