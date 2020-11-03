@@ -10,14 +10,14 @@ import parseActionLogtime from '../../../../utils/parseActionLogtime'
 
 interface IProps{
   data:any;
-  // onTimeSheetEditClick:Function;
-  // onTimeSheetRemoveClick:Function;
+  onTimeSheetEditClick:Function;
+  onTimeSheetRemoveClick:Function;
   // onTimeSheetViewDetailsClick:Function;
   // onTimeSheetBlockClick:Function;
 }
 
 const TimeSheetList:React.FC<IProps> = (props) => {
-  const {data} = props;
+  const {data, onTimeSheetEditClick, onTimeSheetRemoveClick} = props;
   
 
   const handleEdit = (values:any):void =>{
@@ -138,14 +138,14 @@ const TimeSheetList:React.FC<IProps> = (props) => {
             <Button
               variant="contained"
               color="secondary"
-              onClick={() => console.log(tableMeta.rowData)}
+              onClick={() => onTimeSheetRemoveClick(tableMeta.rowData)}
               startIcon={<DeleteIcon />}
               className="btn-operation btn-operation--delete"
             />
             <Button
               variant="contained"
               color="primary"
-              onClick={() => console.log(tableMeta.rowData)}
+              onClick={() => onTimeSheetEditClick(tableMeta.rowData)}
               startIcon={<EditIcon />}
               className="btn-operation btn-operation--edit"
             />

@@ -80,35 +80,35 @@ function MainAccountPage(props: IProps) {
     })
 
     swal({
-    title: "Có chắc là muốn sữa không?",
-    text: "Chắc rồi thì nhấn OK đi",
-    icon: "warning",
-    buttons:  ["Thôi, không sửa nữa đâu!", "OK nè !"],
-    dangerMode: true,
-  })
-  .then((willUpdate) => {
-    if (willUpdate) {
-      actions.setSubmitting(true);
-      props.updateUser(idUser, data)
-      .then(() => {
-        history.push('/dashboard');
-        // toast.success("Câp nhật thành công !", {
-        //   position: toast.POSITION.TOP_LEFT
-        // });
-        // window.location.reload();
-      })
-      .catch(() =>{
-        // toast.error("Câp nhật không thành công !", {
-        //   position: toast.POSITION.TOP_LEFT
-        // });
-      })
-      swal("Cập nhật thành công", {
-        icon: "success",
-      });
-    } else {
-      swal("Suy nghĩ kĩ rồi mới sữa nghen <3");
-    }
-  });    
+      title: "Có chắc là muốn sữa không?",
+      text: "Chắc rồi thì nhấn OK đi",
+      icon: "warning",
+      buttons:  ["Thôi, không sửa nữa đâu!", "OK nè !"],
+      dangerMode: true,
+    })
+    .then((willUpdate) => {
+      if (willUpdate) {
+        actions.setSubmitting(true);
+        props.updateUser(idUser, data)
+        .then(() => {
+          history.push('/dashboard');
+          // toast.success("Câp nhật thành công !", {
+          //   position: toast.POSITION.TOP_LEFT
+          // });
+          // window.location.reload();
+        })
+        .catch(() =>{
+          // toast.error("Câp nhật không thành công !", {
+          //   position: toast.POSITION.TOP_LEFT
+          // });
+        })
+        swal("Cập nhật thành công", {
+          icon: "success",
+        });
+      } else {
+        swal("Suy nghĩ kĩ rồi mới sữa nghen <3");
+      }
+    });    
   }
 
   return (

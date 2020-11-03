@@ -1,10 +1,12 @@
 import { default as dayjs } from 'dayjs'
 import React, { useCallback, useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
+import swal from 'sweetalert'
 import HeaderIntro from '../../../../components/HeaderIntro'
 import { getLogtime } from '../../../../redux/actions/logtimeAction'
 import { getAllUsers } from '../../../../redux/actions/userAction'
 import { LogtimeCurrent } from '../../../../redux/reducers/logtimeReducer'
+import logtimeService from '../../../../services/logtime.service'
 import { totalHours } from '../../../../utils/totalHours'
 import { UserCurrent } from '../../../Account/pages/Main'
 import { MainComponent } from '../../../Main'
@@ -63,18 +65,45 @@ function MainLoginPage(props:IProps) {
     const getAllLogtime:any = logtime.logtimeCurrent;
     console.log(getAllLogtime)
     const total:number = totalHours(getAllLogtime)
-    // const handleTimeSheetEditClick = (sheet:any) =>{
-    //     console.log(sheet)
-    // }
+
+    const handleTimeSheetEditClick = (sheet:any) =>{
+        console.log(sheet)
+    }
+
     // const handleTimeSheetViewDetailsClick = (sheet:any) =>{
     //     console.log(sheet)
     // }
+
     // const handleTimeSheetBlockClick = (sheet:any) =>{
     //     console.log(sheet)
     // }
-    // const handleTimeSheetRemoveClick = (sheet:any) =>{
-    //     console.log(sheet)
-    // }
+
+    const handleTimeSheetRemoveClick = (sheet:any) =>{
+        // sheet: [3609, "2020-10-31T00:00:00", 4, "Tìm hiểu Custom hook trong ReactJS", "Nghiên cứu", "Tìm hiểu Custom hook trong ReactJS", false, "5", undefined]
+        swal({
+            title: "Có chắc là muốn xóa không?",
+            text: "Chắc rồi thì nhấn OK đi",
+            icon: "warning",
+            buttons:  ["Thôi, không xóa nữa đâu!", "OK nè !"],
+            dangerMode: true,
+        })
+        .then((willUpdate) => {
+            if (willUpdate) {
+                logtimeService.deleteLogtimeById(sheet[0])
+                .then(res => {
+                    //re-render after remove logtime
+                    onFetchLogtime();
+                })
+                .catch(err => console.log(err))
+                
+                swal("Cập nhật thành công", {
+                    icon: "success",
+                });
+            } else {
+                swal("Suy nghĩ kĩ rồi mới sữa nghen <3");
+            }
+        });
+    }
 
     return (
         <div>
@@ -95,6 +124,8 @@ function MainLoginPage(props:IProps) {
 
                         <TimeSheetList
                             data={logtime}
+                            onTimeSheetEditClick={handleTimeSheetEditClick}
+                            onTimeSheetRemoveClick={handleTimeSheetRemoveClick}
                         />
                     </div>     
             </MainComponent>

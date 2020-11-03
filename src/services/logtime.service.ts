@@ -21,6 +21,12 @@ class LogtimeService {
       headers: authHeader()
     })
   }
+
+  deleteLogtimeById(id:number){
+    return axios.delete(`${API_ENDPOINT}api/Logtime/${id}`,{
+      headers: authHeader()
+    })
+  }
 }
 
 export default new LogtimeService();
