@@ -4,7 +4,7 @@
 
   .MuiFormControl-root,
   #id{
-    flex: 0 0 25%
+    flex: 0 0 40%
   }
 
   #id{
@@ -14,4 +14,11 @@
 
 .total{
   margin: 1rem 0;
+}
+
+.timesheet-form.admin{
+  .MuiFormControl-root,
+  #id{
+    flex: 0 0 25%
+  }
 }

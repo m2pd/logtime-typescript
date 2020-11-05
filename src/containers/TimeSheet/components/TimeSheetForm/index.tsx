@@ -9,10 +9,11 @@ import { UserCurrent } from '../../../Account/pages/Main';
 import './TimeSheetForm.scss';
 
 interface IProps{
-  FromDate:string;
-  ToDate:string;
-  onSubmit:any;
-  id:number;
+  FromDate: string;
+  ToDate: string;
+  onSubmit: any;
+  id: number;
+  userRoles: string[];
 }
 
 interface initialValues{
@@ -23,7 +24,7 @@ interface initialValues{
 
 
 const TimeSheetForm:React.FC<IProps> = props =>{
-  const {FromDate, ToDate, id, onSubmit}:IProps = props;
+  const {FromDate, ToDate, id, onSubmit, userRoles}:IProps = props;
   const {users}:any = props;
   const listUser:UserCurrent[] = users.users;
   
@@ -36,7 +37,7 @@ const TimeSheetForm:React.FC<IProps> = props =>{
   const optionsValueUsers = parseListUsers(listUser)
 
   return(
-    <div className="timesheet-form">
+    <div className={`${userRoles.includes('Leader') ? 'admin' : '' } timesheet-form`} >
       <Formik initialValues={initialValues} onSubmit={onSubmit} >
         {(formikProps) => {
           //Default formikProps have : values, errors, touched, isSubmitting
@@ -61,15 +62,18 @@ const TimeSheetForm:React.FC<IProps> = props =>{
                 size="small"
               />
 
-              <FastField
-                name="id"
-                className="timesheet-item select-field"
-                component={SelectField}
+              {
+                userRoles.includes('Leader') && userRoles.includes('Admin')
+                &&  <FastField
+                  name="id"
+                  className="timesheet-item select-field"
+                  component={SelectField}
 
-                label="Nhân viên"
-                placeholder='Chọn hoạt động ???'
-                options={optionsValueUsers}
-              />
+                  label="Nhân viên"
+                  placeholder='Chọn nhân viên ???'
+                  options={optionsValueUsers}
+                />
+              }   
 
               <Button type='submit' variant='outlined' color='primary'>
                 Cập nhật

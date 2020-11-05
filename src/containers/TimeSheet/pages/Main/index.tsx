@@ -20,9 +20,10 @@ export interface optionsValues{
 }
 
 function MainLoginPage(props:IProps) {
-    const {currentUser:{id}, logtime} = props;
+    const {currentUser:{id, userRoles}, logtime} = props;
     const history = useHistory();
 
+    console.log(userRoles)
     const [idUser, setIdUser] = useState(id)
     const FromDateDefault:string = dayjs().day(1).format('YYYY-MM-DD');
     const ToDateDefault:string = dayjs().day(6).format('YYYY-MM-DD');
@@ -121,6 +122,7 @@ function MainLoginPage(props:IProps) {
                             ToDate={toDay}
                             onSubmit={getValuesDate}
                             id={id}
+                            userRoles={userRoles}
                         />
 
                         <p className="total">Total: {total}</p>

@@ -9,7 +9,6 @@ import './AccountForm.scss';
 const AccountForm: React.FC<IProps> = (props) =>{
 		const {initialValues,onSubmit}:IProps = props;
 
-		console.log(initialValues)
 		return(
 				<div>
 						<Formik initialValues = {initialValues} onSubmit={onSubmit}>
