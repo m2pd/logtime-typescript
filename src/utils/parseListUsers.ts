@@ -1,4 +1,3 @@
-import { UserCurrent } from './../containers/Account/pages/Main/index';
 interface OptionsValues{
   value: number | null;
   label: string;

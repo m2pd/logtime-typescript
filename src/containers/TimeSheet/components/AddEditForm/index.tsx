@@ -1,64 +1,70 @@
-import { Button, Grid } from '@material-ui/core'
-import { FastField, Form, Formik } from 'formik'
+import { Button, Grid } from '@material-ui/core';
+import { default as dayjs } from 'dayjs';
+import { FastField, Form, Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
-import React from 'react'
-import SelectField from '../../../../custom-field/SelectField';
-import InputField from '../../../../custom-field/InputFiled';
-import { parseListUsers } from '../../../../utils/parseListUsers';
-import { UserCurrent } from '../../../Account/pages/Main';
-import RadioTimeSheetField from '../../../../custom-field/RadioTimeSheetField';
-import { default as dayjs } from 'dayjs'
+import { useHistory } from 'react-router-dom';
 import { ACTION_OPTIONS } from '../../../../constaints';
+import { LogtimeEditPage } from '../../../../constaints/interface';
+import InputField from '../../../../custom-field/InputFiled';
+import InputNumberFiled from '../../../../custom-field/InputNumberFiled';
+import RadioTimeSheetField from '../../../../custom-field/RadioTimeSheetField';
+import SelectField from '../../../../custom-field/SelectField';
 import './AddEditForm.scss';
+
+
 
 interface IProps{
   onSubmit: Function;
+  initialValues: LogtimeEditPage;
+  isAddMode: boolean;
 }
 
-interface initialValues{
-  dateString: string;
-  overtime: boolean;
-  cost: number;
-  title: string;
-  description: string;
-  projectTitle: string;
-  activity: string;
-}
-
-const AddEditForm:React.FC<IProps> = props =>{
+const AddEditForm:React.FC<IProps> = props =>{  
+  const { onSubmit, initialValues, isAddMode}:{onSubmit: any, initialValues:LogtimeEditPage, isAddMode: boolean} = props;
   const FromDateDefault:string = dayjs(new Date()).format('YYYY-MM-DD');
-  
-  const initialValues:initialValues = {
-    dateString: FromDateDefault,
+  const history = useHistory();
+
+  const [initValues, setInitValues] = useState({
+    activity: "",
+    comment: "",
+    cost: 20,
+    date: FromDateDefault,
+    description: "",
+    enable: true,
+    id: 0,
     overtime: false,
-    cost: 0,
-    title: '',
-    description: '',
-    projectTitle: '',
-    activity: '1'
-  }
+    projectTitle: "",
+    title: "",
+    createdAt: FromDateDefault,
+    updatedAt: FromDateDefault,
+    userId: 0,
+  })
 
-  const { onSubmit}:{onSubmit: any} = props;
+  useEffect(() => {
+    setInitValues(initialValues)
+  }, [initialValues])
 
+  console.log(initialValues)
   return(
     <div className="timehseet-form">
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik enableReinitialize initialValues={initValues} onSubmit={onSubmit}>
         {(formikProps) =>{
           // do something here ...
           // const { values, errors, touched, isSubmitting } = formikProps;
-          const { values, errors, touched, isSubmitting } = formikProps;
+          // const { values, errors, touched, isSubmitting } = formikProps;
 
           return(
             <Form className='page-form account-page-form'>
-              <Grid container justify="center" spacing={3}>
+              <Grid container justify="center">
                 <Grid item spacing={3} xs={8}>
                   <FastField
-                    name="dateString"
+                    name="date"
                     label="Thời gian"
                     type="date"
                     component={InputField}
                     size="small"
+                    required={true}
                   />
                 </Grid>
 
@@ -67,9 +73,9 @@ const AddEditForm:React.FC<IProps> = props =>{
                       name="cost"
                       label="Số giờ"
                       type="number"
-                      min={0}
-                      component={InputField}
+                      component={InputNumberFiled}
                       size="small"
+                      required={true}
                   />
                 </Grid>
 
@@ -80,6 +86,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       type="text"
                       component={InputField}
                       size="small"
+                      required={true}
                   />
                 </Grid>
 
@@ -90,6 +97,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       type="text"
                       component={InputField}
                       size="small"
+                      required={true}
                   />
                 </Grid>
 
@@ -109,6 +117,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       label="Hình thức"
                       component={RadioTimeSheetField}
                       size="small"
+                      required={true}
                   />
                 </Grid>
                 
@@ -121,12 +130,17 @@ const AddEditForm:React.FC<IProps> = props =>{
                     label="Nhân viên"
                     placeholder='Chọn hoạt động ???'
                     options={ACTION_OPTIONS}
+                    required={true}
                   />
                 </Grid>
 
                 <Grid item spacing={3} xs={8}>
                   <Button type='submit' variant='outlined' color='primary'>
-                    Thêm mới
+                    {isAddMode ? 'Thêm mới' : 'Cập nhật'}
+                  </Button>
+
+                  <Button className="btn btn-timesheet" variant='contained' color='primary' onClick={() => history.push('/timesheet')}>
+                    Về trang danh sách
                   </Button>
                 </Grid>
               
@@ -141,7 +155,7 @@ const AddEditForm:React.FC<IProps> = props =>{
 
 const mapStateToProps = (state:any) => {
   return{
-    users: state.users
+    users: state.users,
   }
 }
 

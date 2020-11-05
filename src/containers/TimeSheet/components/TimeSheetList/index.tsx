@@ -18,12 +18,6 @@ interface IProps{
 
 const TimeSheetList:React.FC<IProps> = (props) => {
   const {data, onTimeSheetEditClick, onTimeSheetRemoveClick} = props;
-  
-
-  const handleEdit = (values:any):void =>{
-    console.log(values)
-    console.log(values)
-  }
 
   const columns = [
     {

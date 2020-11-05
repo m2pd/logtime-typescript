@@ -27,6 +27,12 @@ export default function(state=initialValues, actions:Action){
         ...state,
         logtimeCurrent: actions.payload
       }
+    
+    case ActionTypes.getLogtimeById:
+      return{
+        ...state,
+        logtimeCurrent: actions.payload
+      }
   
     default:
       return state;

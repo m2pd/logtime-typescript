@@ -11,7 +11,7 @@ import {
   LogoutAction,
 } from './../redux/actions/authAction';
 
-import { GetLogTime } from '../redux/actions/logtimeAction';
+import { GetLogTime, GetLogTimeById } from '../redux/actions/logtimeAction';
 
 export enum ActionTypes {
   loginSuccess,
@@ -23,6 +23,7 @@ export enum ActionTypes {
   updateUser,
 
   getLogtime,
+  getLogtimeById,
 
   setMessage,
   clearMessage,
@@ -37,4 +38,5 @@ export type Action =
   | UpdateUser
   | GetUser
   | GetAllUsers
-  | GetLogTime ;
+  | GetLogTime
+  | GetLogTimeById ;

@@ -36,6 +36,7 @@ function SelectField(props:IProps){
       value={selectedOption}
       onChange={handleSelectedOptionChange}
 
+      label={label}
       placeholder={placeholder}
       isDisabled={disabled}
       options={options}

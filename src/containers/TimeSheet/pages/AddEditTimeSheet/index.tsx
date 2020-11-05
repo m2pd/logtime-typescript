@@ -1,28 +1,72 @@
-import React from 'react';
+import { default as dayjs } from 'dayjs';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import HeaderIntro from '../../../../components/HeaderIntro';
-import { Logtime, LogtimeForm } from '../../../../constaints/interface';
+import { Logtime, LogtimeEditPage } from '../../../../constaints/interface';
+import logtimeService from '../../../../services/logtime.service';
+import { UserCurrent } from '../../../Account/pages/Main';
 import { MainComponent } from '../../../Main';
 import AddEditForm from '../../components/AddEditForm';
-import logtimeService from '../../../../services/logtime.service';
-import parseActionLogtime from '../../../../utils/parseActionLogtime';
-import {connect} from 'react-redux'
-import { UserCurrent } from '../../../Account/pages/Main';
-import { toast } from 'react-toastify';
-import { useHistory } from 'react-router-dom';
+
 
 interface IProps{
   currentUser: UserCurrent
+  timesheetId:any;
 }
 
 const AddEditTimeSheetPage:React.FC<IProps> = props =>{
   const history = useHistory();
+  const [editedTimeSheet, setEditedTimeSheet] = useState({})
+  //Check param in router isAddMode
+  const { timesheetId }:any = useParams();
+  const isAddMode = !timesheetId;
+
+  //type is many value: Logtime + enable, comment
+  useEffect(() => {
+    logtimeService.getLogtimeById(+timesheetId)
+    .then(res =>{
+
+      //Format date render to formik
+      const newData = {
+        ...res.data,
+        date: dayjs(res.data.date).format('YYYY-MM-DD')
+      }
+
+      setEditedTimeSheet(newData)
+    })
+    .catch(err => console.log(err))
+  }, [timesheetId])
+
+  console.log({timesheetId,editedTimeSheet})
+  const FromDateDefault:string = dayjs(new Date()).format('YYYY-MM-DD');
+
+  const initialValues:any = isAddMode
+    ? {
+      activity: "",
+      comment: "",
+      cost: 0,
+      date: FromDateDefault,
+      description: "",
+      enable: true,
+      id: 0,
+      overtime: false,
+      projectTitle: "",
+      title: "",
+      createdAt: FromDateDefault,
+      updatedAt: FromDateDefault,
+      userId: 0,
+    } : editedTimeSheet;
 
   const {currentUser: {id}} =  props;
 
-  const handleSubmit = (values:LogtimeForm) => {
+  const handleSubmit = (values:LogtimeEditPage) => {
+    console.log(values)
     const data:Logtime = {
       ...values,
-      userId: id
+      userId: id,
+      dateString: values.date,
     }
 
     logtimeService.postLogtime(data)
@@ -43,6 +87,8 @@ const AddEditTimeSheetPage:React.FC<IProps> = props =>{
         <div className="page-content">
           <AddEditForm
             onSubmit={handleSubmit}
+            initialValues={initialValues}
+            isAddMode={isAddMode}
           />
         </div>
       </MainComponent>

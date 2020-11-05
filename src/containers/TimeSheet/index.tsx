@@ -11,7 +11,10 @@ function TimeSheet() {
 
         <Route exact path={match.url} component={MainTimeSheetPage} />
         <Route path={`${match.url}/add`} component={AddEditTimeSheetPage} />
-  
+        <Route 
+          path={`${match.url}/:timesheetId`} 
+          component={AddEditTimeSheetPage}
+        />
         <Route component={NotFound} />
       </Switch>
     );

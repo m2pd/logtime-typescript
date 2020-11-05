@@ -1,6 +1,7 @@
 import { default as dayjs } from 'dayjs'
 import React, { useCallback, useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert'
 import HeaderIntro from '../../../../components/HeaderIntro'
 import { getLogtime } from '../../../../redux/actions/logtimeAction'
@@ -20,7 +21,7 @@ export interface optionsValues{
 
 function MainLoginPage(props:IProps) {
     const {currentUser:{id}, logtime} = props;
-
+    const history = useHistory();
 
     const [idUser, setIdUser] = useState(id)
     const FromDateDefault:string = dayjs().day(1).format('YYYY-MM-DD');
@@ -67,7 +68,9 @@ function MainLoginPage(props:IProps) {
     const total:number = totalHours(getAllLogtime)
 
     const handleTimeSheetEditClick = (sheet:any) =>{
-        console.log(sheet)
+        console.log("Edit:",sheet)
+        const editSheetUrl = `/timesheet/${sheet[0]}` 
+        history.push(editSheetUrl)
     }
 
     // const handleTimeSheetViewDetailsClick = (sheet:any) =>{

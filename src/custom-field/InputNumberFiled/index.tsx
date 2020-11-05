@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core';
 import React from 'react';
 
-interface PropsInputField {
+interface PropsInputNumberFiled {
   field: any;
   type: string;
   label: string;
@@ -11,7 +11,7 @@ interface PropsInputField {
   variant?:string;
   required:boolean;
 }
-function InputField(props: PropsInputField) {
+function InputNumberFiled(props: PropsInputNumberFiled) {
   const { field, type, label,size,disabled,variant, min, required }: any = props;
   const { name }: any = field;
   //field have name, vale, onChange, onBlur
@@ -29,13 +29,15 @@ function InputField(props: PropsInputField) {
       fullWidth
       disabled={disabled} 
       required={required}
+      InputProps={{ inputProps: { min: 0 } }}
+
     />
   );
 }
 
-InputField.defaultProps = {
+InputNumberFiled.defaultProps = {
   variant:"outlined",
   required: false,
 }
 
-export default InputField;
+export default InputNumberFiled;

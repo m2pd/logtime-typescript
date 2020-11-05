@@ -1,3 +1,19 @@
+export interface LogtimeEditPage{
+  activity: string;
+  comment: string;
+  cost: number;
+  createdAt: string;
+  date: string;
+  description: string;
+  enable: boolean;
+  id: number;
+  overtime: boolean;
+  projectTitle: string;
+  title: string;
+  updatedAt: string;
+  userId: number;
+}
+
 export interface Logtime{
   userId:number;
   dateString: string;
@@ -17,4 +33,14 @@ export interface LogtimeForm{
   overtime: boolean;
   projectTitle: string;
   title: string;
+}
+
+export interface initialValuesAddEditForm{
+  dateString: string;
+  overtime: boolean;
+  cost: number;
+  title: string;
+  description: string;
+  projectTitle: string;
+  activity: string;
 }
