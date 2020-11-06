@@ -1,7 +1,7 @@
-import { Logtime } from './../constaints/interface';
+import axios from 'axios';
 import { API_ENDPOINT } from './../constaints/index';
-import axios from 'axios'
-import authHeader from './auth-header'
+import { Logtime, LogtimePutPage } from './../constaints/interface';
+import authHeader from './auth-header';
 
 class LogtimeService {
   getLogtime(id:number,FromDate:string,ToDate:string){
@@ -18,6 +18,12 @@ class LogtimeService {
 
   getLogtimeById(id:number){
     return axios.get(`${API_ENDPOINT}api/Logtime/${id}`,{
+      headers: authHeader()
+    })
+  }
+
+  putLogtimeById(id:number, data: LogtimePutPage){
+    return axios.put(`${API_ENDPOINT}api/Logtime/${id}`, data,{
       headers: authHeader()
     })
   }

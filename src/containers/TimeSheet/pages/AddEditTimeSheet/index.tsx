@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import HeaderIntro from '../../../../components/HeaderIntro';
-import { Logtime, LogtimeEditPage } from '../../../../constaints/interface';
+import { LogtimeEditPage, LogtimePutPage } from '../../../../constaints/interface';
 import logtimeService from '../../../../services/logtime.service';
 import { UserCurrent } from '../../../Account/pages/Main';
 import { MainComponent } from '../../../Main';
 import AddEditForm from '../../components/AddEditForm';
-
+import swal from 'sweetalert';
 
 interface IProps{
   currentUser: UserCurrent
@@ -59,23 +59,40 @@ const AddEditTimeSheetPage:React.FC<IProps> = props =>{
       userId: 0,
     } : editedTimeSheet;
 
-  const {currentUser: {id}} =  props;
+  const {currentUser: {id, userRoles}} =  props;
 
   const handleSubmit = (values:LogtimeEditPage) => {
     console.log(values)
-    const data:Logtime = {
+    const data:LogtimePutPage = {
       ...values,
       userId: id,
       dateString: values.date,
     }
 
-    logtimeService.postLogtime(data)
-    .then(res => history.push('/timesheet'))
-    .catch(err =>{
-      toast.error("Cậu chưa nhập đầy đủ thông tin đâu 🤨", {
-        position: toast.POSITION.BOTTOM_RIGHT
-      });
-    })
+    if(isAddMode){
+      logtimeService.postLogtime(data)
+      .then(res => {
+        swal("Yeahhh!", "Đã thêm mới logtime thành công 😊", "success");
+        history.push('/timesheet')
+      })
+      .catch(err =>{
+        toast.error("Cậu chưa nhập đầy đủ thông tin đâu 🤨", {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+      })
+    } else {
+      logtimeService.putLogtimeById(+timesheetId,data)
+      .then(res => {
+        swal("Yeahhh!", "Cập nhật thành công rồi nha 😍", "success");
+        history.push('/timesheet')
+      })
+      .catch(err =>{
+        toast.error("Cậu chưa nhập đầy đủ thông tin đâu 🤨", {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+      })
+    }
+
   }
   return(
     <div>
@@ -89,6 +106,7 @@ const AddEditTimeSheetPage:React.FC<IProps> = props =>{
             onSubmit={handleSubmit}
             initialValues={initialValues}
             isAddMode={isAddMode}
+            userRoles={userRoles}
           />
         </div>
       </MainComponent>

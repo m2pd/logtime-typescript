@@ -18,10 +18,11 @@ interface IProps{
   onSubmit: Function;
   initialValues: LogtimeEditPage;
   isAddMode: boolean;
+  userRoles: string[],
 }
 
 const AddEditForm:React.FC<IProps> = props =>{  
-  const { onSubmit, initialValues, isAddMode}:{onSubmit: any, initialValues:LogtimeEditPage, isAddMode: boolean} = props;
+  const { onSubmit, initialValues, isAddMode, userRoles}:{onSubmit: any, initialValues:LogtimeEditPage, isAddMode: boolean, userRoles: string[]} = props;
   const FromDateDefault:string = dayjs(new Date()).format('YYYY-MM-DD');
   const history = useHistory();
 
@@ -133,13 +134,42 @@ const AddEditForm:React.FC<IProps> = props =>{
                     required={true}
                   />
                 </Grid>
+                {/* Layout show only admin */}
+                {
+                  userRoles.includes('Leader') && userRoles.includes('Admin') 
+                  && (
+                      <div>
+                        <Grid item spacing={3} xs={8}>
+                        <FastField
+                          name="activity2"
+                          className="timesheet-item select-field"
+                          component={SelectField}
+
+                          label="Nhân viên"
+                          placeholder='Chọn hoạt động ???'
+                          options={ACTION_OPTIONS}
+                          required={true}
+                        />
+                      </Grid>
+                      <Grid item spacing={3} xs={8}>
+                        <FastField
+                            name="description"
+                            label="Mô tả"
+                            type="text"
+                            component={InputField}
+                            size="small"
+                        />
+                      </Grid>
+                      </div>
+                    )
+                }
 
                 <Grid item spacing={3} xs={8}>
-                  <Button type='submit' variant='outlined' color='primary'>
+                  <Button type='submit' variant='contained' color='primary'>
                     {isAddMode ? 'Thêm mới' : 'Cập nhật'}
                   </Button>
 
-                  <Button className="btn btn-timesheet" variant='contained' color='primary' onClick={() => history.push('/timesheet')}>
+                  <Button className="btn btn-timesheet" variant='outlined' color='primary' onClick={() => history.push('/timesheet')}>
                     Về trang danh sách
                   </Button>
                 </Grid>

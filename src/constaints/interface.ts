@@ -14,6 +14,22 @@ export interface LogtimeEditPage{
   userId: number;
 }
 
+export interface LogtimePutPage{
+  activity: string;
+  comment: string;
+  cost: number;
+  createdAt: string;
+  dateString: string;
+  description: string;
+  enable: boolean;
+  id: number;
+  overtime: boolean;
+  projectTitle: string;
+  title: string;
+  updatedAt: string;
+  userId: number;
+}
+
 export interface Logtime{
   userId:number;
   dateString: string;
