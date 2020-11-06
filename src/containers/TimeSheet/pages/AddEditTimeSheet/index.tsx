@@ -63,13 +63,16 @@ const AddEditTimeSheetPage:React.FC<IProps> = props =>{
 
   const handleSubmit = (values:LogtimeEditPage) => {
     console.log(values)
-    const data:LogtimePutPage = {
-      ...values,
-      userId: id,
-      dateString: values.date,
-    }
+    const isAdmin:boolean = userRoles.includes('Admin');
+    const isUserSelected = isAdmin ? values.userId : id;
 
     if(isAddMode){
+      const data:LogtimePutPage = {
+        ...values,
+        userId: id,
+        dateString: values.date,
+      }
+
       logtimeService.postLogtime(data)
       .then(res => {
         swal("Yeahhh!", "Đã thêm mới logtime thành công 😊", "success");
@@ -81,6 +84,12 @@ const AddEditTimeSheetPage:React.FC<IProps> = props =>{
         });
       })
     } else {
+      const data:LogtimePutPage = {
+        ...values,
+        userId: isUserSelected,
+        dateString: values.date,
+      }
+
       logtimeService.putLogtimeById(+timesheetId,data)
       .then(res => {
         swal("Yeahhh!", "Cập nhật thành công rồi nha 😍", "success");
