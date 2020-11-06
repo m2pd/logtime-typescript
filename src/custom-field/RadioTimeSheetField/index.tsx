@@ -20,6 +20,8 @@ RadioTimeSheetField.defaultProps = {
   label: '',
   placeholder: '',
   disabled: false,
+  labelChild1: 'Thông thường',
+  labelChild2: 'Làm thêm giờ (OT)',
 };
 
 interface PropsInputField {
@@ -30,10 +32,13 @@ interface PropsInputField {
   size:string;
   disabled?:boolean;
   variant?:string;
+  
+  labelChild1?: string;
+  labelChild2?: string;
 }
 
 function RadioTimeSheetField(props:PropsInputField) {
-  const { field, form, label, disabled } = props;
+  const { field, form, label, labelChild1, labelChild2, disabled } = props;
   const { name, value } = field;
 
   return (
@@ -41,8 +46,8 @@ function RadioTimeSheetField(props:PropsInputField) {
       <FormControl component="fieldset" disabled={disabled}>
         <FormLabel component="legend">{label} *</FormLabel>
         <RadioGroup row  aria-label="gender">
-          <FormControlLabel value={value} control={<Radio />} label="Thông thường" checked={value === false} onChange={() => form.setFieldValue(name, false)} />
-          <FormControlLabel value={value} control={<Radio />} label="Làm thêm giờ (OT)" checked={value === true} onChange={() => form.setFieldValue(name, true)} />
+          <FormControlLabel value={value} control={<Radio />} label={labelChild1} checked={value === false} onChange={() => form.setFieldValue(name, false)} />
+          <FormControlLabel value={value} control={<Radio />} label={labelChild2} checked={value === true} onChange={() => form.setFieldValue(name, true)} />
         </RadioGroup>
       </FormControl>
     </div>

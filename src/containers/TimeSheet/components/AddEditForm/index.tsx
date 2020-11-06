@@ -1,7 +1,7 @@
 import { Button, Grid } from '@material-ui/core';
 import { default as dayjs } from 'dayjs';
 import { FastField, Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ACTION_OPTIONS } from '../../../../constaints';
@@ -138,29 +138,28 @@ const AddEditForm:React.FC<IProps> = props =>{
                 {
                   userRoles.includes('Leader') && userRoles.includes('Admin') 
                   && (
-                      <div>
+                      <Fragment>
                         <Grid item spacing={3} xs={8}>
-                        <FastField
-                          name="activity2"
-                          className="timesheet-item select-field"
-                          component={SelectField}
-
-                          label="Nhân viên"
-                          placeholder='Chọn hoạt động ???'
-                          options={ACTION_OPTIONS}
-                          required={true}
-                        />
-                      </Grid>
+                          <FastField
+                              name="enable"
+                              label="Khóa Logtime"
+                              labelChild1="Đóng"
+                              labelChild2="Mở"
+                              component={RadioTimeSheetField}
+                              size="small"
+                              required={true}
+                          />
+                        </Grid>
                       <Grid item spacing={3} xs={8}>
                         <FastField
-                            name="description"
+                            name="comment"
                             label="Mô tả"
                             type="text"
                             component={InputField}
                             size="small"
                         />
                       </Grid>
-                      </div>
+                      </Fragment>
                     )
                 }
 

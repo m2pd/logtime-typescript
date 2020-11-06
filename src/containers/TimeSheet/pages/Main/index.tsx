@@ -74,9 +74,9 @@ function MainLoginPage(props:IProps) {
         history.push(editSheetUrl)
     }
 
-    // const handleTimeSheetViewDetailsClick = (sheet:any) =>{
-    //     console.log(sheet)
-    // }
+    const handleTimeSheetViewDetailsClick = (sheet:any) =>{
+        console.log(sheet)
+    }
 
     // const handleTimeSheetBlockClick = (sheet:any) =>{
     //     console.log(sheet)
@@ -129,8 +129,10 @@ function MainLoginPage(props:IProps) {
 
                         <TimeSheetList
                             data={logtime}
+                            userRoles={userRoles}
                             onTimeSheetEditClick={handleTimeSheetEditClick}
                             onTimeSheetRemoveClick={handleTimeSheetRemoveClick}
+                            onTimeSheetViewDetailsClick={handleTimeSheetViewDetailsClick}
                         />
                     </div>     
             </MainComponent>

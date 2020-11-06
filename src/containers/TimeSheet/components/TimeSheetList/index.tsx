@@ -1,10 +1,11 @@
 import { default as dayjs } from 'dayjs';
 import MUIDataTable from "mui-datatables";
-import React from 'react';
+import React, { Fragment } from 'react';
 import './TimeSheetList.scss';
 import Chip from '@material-ui/core/Chip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import Button from '@material-ui/core/Button';
 import parseActionLogtime from '../../../../utils/parseActionLogtime'
 
@@ -12,12 +13,13 @@ interface IProps{
   data:any;
   onTimeSheetEditClick:Function;
   onTimeSheetRemoveClick:Function;
-  // onTimeSheetViewDetailsClick:Function;
+  onTimeSheetViewDetailsClick:Function;
   // onTimeSheetBlockClick:Function;
+  userRoles: string[];
 }
 
 const TimeSheetList:React.FC<IProps> = (props) => {
-  const {data, onTimeSheetEditClick, onTimeSheetRemoveClick} = props;
+  const {data, userRoles, onTimeSheetEditClick, onTimeSheetRemoveClick, onTimeSheetViewDetailsClick} = props;
 
   const columns = [
     {
@@ -122,27 +124,42 @@ const TimeSheetList:React.FC<IProps> = (props) => {
        },
     },
     {
-      name: "operation",
+      name: "enable",
       label: "Thao tác",
       options: {
         customBodyRender:(value:any, tableMeta:any, updateValue:any) => {
-        // console.log(tableMeta)
         return (
-          <div>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => onTimeSheetRemoveClick(tableMeta.rowData)}
-              startIcon={<DeleteIcon />}
-              className="btn-operation btn-operation--delete"
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => onTimeSheetEditClick(tableMeta.rowData)}
-              startIcon={<EditIcon />}
-              className="btn-operation btn-operation--edit"
-            />
+          <div style={{textAlign: 'center'}}>
+            {
+              //Leader only show button Edit and Remove
+              (( userRoles.includes('Leader') || value ))
+              ?  ( <Fragment>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => onTimeSheetRemoveClick(tableMeta.rowData)}
+                      startIcon={<DeleteIcon />}
+                      className="btn-operation btn-operation--delete"
+                    />
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => onTimeSheetEditClick(tableMeta.rowData)}
+                      startIcon={<EditIcon />}
+                      className="btn-operation btn-operation--edit"
+                    />
+                  </Fragment>
+                )
+              : <Fragment>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onTimeSheetViewDetailsClick(tableMeta.rowData)}
+                    startIcon={<VisibilityIcon />}
+                    className="btn-operation btn-operation--edit"
+                  />
+               </Fragment>
+            }
            </div>
            );
          }

@@ -11,7 +11,7 @@ const AccountForm: React.FC<IProps> = (props) =>{
 
 		return(
 				<div>
-						<Formik initialValues = {initialValues} onSubmit={onSubmit}>
+						<Formik enableReinitialize initialValues = {initialValues} onSubmit={onSubmit}>
 								{(formikProps) => {
 										//Default formikProps have : values, errors, touched, isSubmitting
 										// const {values, errors, touched, isSubmitting} = formikProps;

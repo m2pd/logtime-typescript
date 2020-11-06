@@ -38,7 +38,7 @@ const TimeSheetForm:React.FC<IProps> = props =>{
 
   return(
     <div className={`${userRoles.includes('Leader') ? 'admin' : '' } timesheet-form`} >
-      <Formik initialValues={initialValues} onSubmit={onSubmit} >
+      <Formik enableReinitialize initialValues={initialValues} onSubmit={onSubmit} >
         {(formikProps) => {
           //Default formikProps have : values, errors, touched, isSubmitting
 
