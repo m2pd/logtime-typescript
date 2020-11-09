@@ -6,7 +6,7 @@ interface PropsInputField {
   type: string;
   label: string;
   size:string;
-  disabled:boolean;
+  disabled?:boolean;
   min?:string;
   variant?:string;
   required:boolean;
@@ -36,6 +36,7 @@ function InputField(props: PropsInputField) {
 InputField.defaultProps = {
   variant:"outlined",
   required: false,
+  disabled: false,
 }
 
 export default InputField;

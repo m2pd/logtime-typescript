@@ -76,6 +76,8 @@ function MainLoginPage(props:IProps) {
 
     const handleTimeSheetViewDetailsClick = (sheet:any) =>{
         console.log(sheet)
+        const viewSheetUrl = `/timesheet/${sheet[0]}` 
+        history.push(viewSheetUrl)
     }
 
     // const handleTimeSheetBlockClick = (sheet:any) =>{

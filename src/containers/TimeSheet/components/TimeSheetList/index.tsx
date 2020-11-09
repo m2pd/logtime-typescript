@@ -179,7 +179,14 @@ const TimeSheetList:React.FC<IProps> = (props) => {
     },
     onDownload: (buildHead:any, buildBody:any, columns:any, data:any) => {
       return "\uFEFF" + buildHead(columns) + buildBody(data); 
-    } 
+    },
+    //Custom row render check has is enable block
+    setRowProps: (row: any, dataIndex: number, rowIndex: number) => {
+      console.log({row, dataIndex, rowIndex})
+      return{
+        className: 'active'
+      }
+    },
   };
   
   return(

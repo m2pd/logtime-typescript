@@ -11,6 +11,7 @@ import InputNumberFiled from '../../../../custom-field/InputNumberFiled';
 import RadioTimeSheetField from '../../../../custom-field/RadioTimeSheetField';
 import SelectField from '../../../../custom-field/SelectField';
 import './AddEditForm.scss';
+import { checkRoles } from '../../../../utils/checkRoles'
 
 
 
@@ -25,6 +26,8 @@ const AddEditForm:React.FC<IProps> = props =>{
   const { onSubmit, initialValues, isAddMode, userRoles}:{onSubmit: any, initialValues:LogtimeEditPage, isAddMode: boolean, userRoles: string[]} = props;
   const FromDateDefault:string = dayjs(new Date()).format('YYYY-MM-DD');
   const history = useHistory();
+  const isAdmin = userRoles.includes('Leader') && userRoles.includes('Admin') 
+  const enableTextFiled = isAdmin ? true : initialValues.enable;
 
   const [initValues, setInitValues] = useState({
     activity: "",
@@ -47,6 +50,7 @@ const AddEditForm:React.FC<IProps> = props =>{
   }, [initialValues])
 
   console.log(initialValues)
+  console.log(enableTextFiled)
   return(
     <div className="timehseet-form">
       <Formik enableReinitialize initialValues={initValues} onSubmit={onSubmit}>
@@ -66,6 +70,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                     component={InputField}
                     size="small"
                     required={true}
+                    disabled={!enableTextFiled}
                   />
                 </Grid>
 
@@ -77,6 +82,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       component={InputNumberFiled}
                       size="small"
                       required={true}
+                      disabled={!enableTextFiled}
                   />
                 </Grid>
 
@@ -88,6 +94,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       component={InputField}
                       size="small"
                       required={true}
+                      disabled={!enableTextFiled}
                   />
                 </Grid>
 
@@ -99,6 +106,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       component={InputField}
                       size="small"
                       required={true}
+                      disabled={!enableTextFiled}
                   />
                 </Grid>
 
@@ -109,6 +117,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       type="text"
                       component={InputField}
                       size="small"
+                      disabled={!enableTextFiled}
                   />
                 </Grid>
 
@@ -119,6 +128,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                       component={RadioTimeSheetField}
                       size="small"
                       required={true}
+                      disabled={!enableTextFiled}
                   />
                 </Grid>
                 
@@ -132,11 +142,26 @@ const AddEditForm:React.FC<IProps> = props =>{
                     placeholder='Chọn hoạt động ???'
                     options={ACTION_OPTIONS}
                     required={true}
+                    disabled={!enableTextFiled}
                   />
                 </Grid>
+                {/* Show block TextFiled */}
+                {!enableTextFiled &&
+                  <Grid item spacing={3} xs={8}>
+                    <FastField
+                        name="comment"
+                        label="Bình luận"
+                        type="text"
+                        component={InputField}
+                        size="small"
+                        disabled={!enableTextFiled}
+                    />
+                  </Grid>                
+                }
                 {/* Layout show only admin */}
                 {
-                  userRoles.includes('Leader') && userRoles.includes('Admin') 
+                  isAdmin
+                  // checkRoles('Admin' || 'Leader')
                   && (
                       <Fragment>
                         <Grid item spacing={3} xs={8}>
@@ -150,25 +175,28 @@ const AddEditForm:React.FC<IProps> = props =>{
                               required={true}
                           />
                         </Grid>
-                      <Grid item spacing={3} xs={8}>
-                        <FastField
-                            name="comment"
-                            label="Mô tả"
-                            type="text"
-                            component={InputField}
-                            size="small"
-                        />
-                      </Grid>
+                        <Grid item spacing={3} xs={8}>
+                          <FastField
+                              name="comment"
+                              label="Bình luận"
+                              type="text"
+                              component={InputField}
+                              size="small"
+                              disabled={!enableTextFiled}
+                          />
+                        </Grid>  
                       </Fragment>
                     )
                 }
 
                 <Grid item spacing={3} xs={8}>
-                  <Button type='submit' variant='contained' color='primary'>
-                    {isAddMode ? 'Thêm mới' : 'Cập nhật'}
-                  </Button>
+                  {enableTextFiled && 
+                    <Button className="btn btn-timesheet" type='submit' variant='contained' color='primary'>
+                      {isAddMode ? 'Thêm mới' : 'Cập nhật'}
+                    </Button>
+                  }
 
-                  <Button className="btn btn-timesheet" variant='outlined' color='primary' onClick={() => history.push('/timesheet')}>
+                  <Button variant='outlined' color='primary' onClick={() => history.push('/timesheet')}>
                     Về trang danh sách
                   </Button>
                 </Grid>
