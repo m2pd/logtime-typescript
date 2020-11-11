@@ -20,7 +20,7 @@ interface IProps{
 
 const TimeSheetList:React.FC<IProps> = (props) => {
   const {data, userRoles, onTimeSheetEditClick, onTimeSheetRemoveClick, onTimeSheetViewDetailsClick} = props;
-
+  
   const columns = [
     {
      name: "id",
@@ -28,11 +28,12 @@ const TimeSheetList:React.FC<IProps> = (props) => {
      options: {
       sort: false,
       filter: false,
-      customBodyRenderLite:(dataIndex:any) => {
-      let index = dataIndex + 1;
+      customBodyRender:(value:any,tableMeta:any) => {
+      let index = tableMeta.rowIndex + 1;
+      const isBlock = tableMeta.rowData[8];
        return (
          <div>
-           <p onClick={() => console.log(dataIndex)}>{index}</p>
+           <p className={isBlock || 'block'}>{index}</p>
          </div>
          );
        }
@@ -44,10 +45,12 @@ const TimeSheetList:React.FC<IProps> = (props) => {
      options: {
       filter: true,
       sort: true,
-      customBodyRender:(value:any) => {
+      customBodyRender:(value:any, tableMeta:any) => {
         let dataDay = dayjs(value).format('YYYY-MM-DD');
+        const isBlock = tableMeta.rowData[8];
+
         return(
-          <div style={{ width: '90px' }}>
+          <div className={isBlock || 'block'} style={{ width: '90px' }}>
             {dataDay}
           </div>
         );
@@ -60,9 +63,10 @@ const TimeSheetList:React.FC<IProps> = (props) => {
      options: {
       sort: true,
       filter: true,
-      customBodyRender:(value:any) => {
+      customBodyRender:(value:any, tableMeta:any) => {
+        const isBlock = tableMeta.rowData[8];
         return(
-          <div style={{ width: '70px' }}>
+          <div className={isBlock || 'block'} style={{ width: '70px' }}>
             {value}
           </div>
         );
@@ -75,9 +79,10 @@ const TimeSheetList:React.FC<IProps> = (props) => {
      options: {
       sort: true,
       filter: true,
-      customBodyRender:(value:any) => {
+      customBodyRender:(value:any, tableMeta:any) => {
+        const isBlock = tableMeta.rowData[8];
         return(
-          <div style={{ width: '150px' }}>
+          <div className={isBlock || 'block'} style={{ width: '150px' }}>
             {value}
           </div>
         );
@@ -87,6 +92,16 @@ const TimeSheetList:React.FC<IProps> = (props) => {
     {
      name: "projectTitle",
      label: "Dự án",
+     options: {
+       customBodyRender:(value:any, tableMeta:any) => {
+        const isBlock = tableMeta.rowData[8];
+        return(
+          <div className={isBlock || 'block'} style={{ width: '150px' }}>
+            {value}
+          </div>
+        );
+      },
+     }
     },
     {
      name: "description",
@@ -94,6 +109,14 @@ const TimeSheetList:React.FC<IProps> = (props) => {
      options: {
       sort: true,
       filter: true,
+      customBodyRender:(value:any, tableMeta:any) => {
+        const isBlock = tableMeta.rowData[8];
+        return(
+          <div className={isBlock || 'block'}>
+            {value}
+          </div>
+        );
+      },
      },
     },
     {
@@ -113,10 +136,11 @@ const TimeSheetList:React.FC<IProps> = (props) => {
       name: "activity",
       label: "Hoạt động",
       options: {
-        customBodyRender:(value:any) => {
-          const valueActionLogtime:string = parseActionLogtime(value)
+        customBodyRender:(value:any, tableMeta:any) => {
+          const valueActionLogtime:string = parseActionLogtime(value);
+          const isBlock = tableMeta.rowData[8];
           return(
-            <div style={{ width: '70px' }}>
+            <div className={isBlock || 'block'} style={{ width: '70px' }}>
               {valueActionLogtime}
             </div>
           );
@@ -129,7 +153,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
       options: {
         customBodyRender:(value:any, tableMeta:any, updateValue:any) => {
         return (
-          <div style={{textAlign: 'center'}}>
+          <div className={value || 'block'} style={{textAlign: 'center'}}>
             {
               //Leader only show button Edit and Remove
               (( userRoles.includes('Leader') || value ))
@@ -162,7 +186,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
             }
            </div>
            );
-         }
+         },
       }
     },
    ];
@@ -182,9 +206,11 @@ const TimeSheetList:React.FC<IProps> = (props) => {
     },
     //Custom row render check has is enable block
     setRowProps: (row: any, dataIndex: number, rowIndex: number) => {
-      console.log({row, dataIndex, rowIndex})
-      return{
-        className: 'active'
+      console.log(row[8].props.className)
+      if(row[8].props.className === 'block'){
+        return{
+          className: 'active'
+        }
       }
     },
   };
