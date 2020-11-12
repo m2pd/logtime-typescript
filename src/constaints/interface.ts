@@ -60,3 +60,14 @@ export interface initialValuesAddEditForm{
   projectTitle: string;
   activity: string;
 }
+
+export interface User{
+  id: number;
+  fullName: string;
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  team: string;
+  active: boolean;
+  roles : string[];
+}

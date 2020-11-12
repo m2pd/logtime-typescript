@@ -9,6 +9,7 @@ const LoginPage = React.lazy(() => import('./containers/Login'));
 const AccountPage = React.lazy(() => import('./containers/Account'));
 const TimeSheet = React.lazy(() => import('./containers/TimeSheet'));
 const DashBoard = React.lazy(() => import('./containers/DashBoard'));
+const Accounts = React.lazy(() => import('./containers/Accounts'));
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
             <Route path='/account' component={AccountPage} />
             <Route path='/timesheet' component={TimeSheet} />
             <Route path='/dashboard' component={DashBoard} />
+            <Route path='/accounts' component={Accounts} />
+            
             <Route component={NotFound} />
           </Switch>
         </BrowserRouter>

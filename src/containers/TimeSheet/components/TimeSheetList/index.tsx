@@ -199,6 +199,9 @@ const TimeSheetList:React.FC<IProps> = (props) => {
     textLabels: {
       body: {
         noMatch: 'Không tìm thấy kết quả'
+      },
+      pagination: {
+        rowsPerPage: "Số hàng trên trang:",
       }
     },
     onDownload: (buildHead:any, buildBody:any, columns:any, data:any) => {

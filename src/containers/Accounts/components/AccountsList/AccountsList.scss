@@ -1,0 +1,37 @@
+.account-list{
+
+  .MuiTableCell-root{
+    word-break: break-word;
+    font-family: 'Poppins';
+  }
+  
+  .MuiTable-root{
+    th.MuiTableCell-root{
+        background-color: #3c44b1;
+        color:#fff;
+    }
+  }
+  .MuiToolbar-regular .MuiTypography-h6{
+    background-color: #fafafe;
+    color: #3b3e66;
+    font-weight: 600;
+  }
+
+  .MuiToolbar-regular {
+      background-color: #fafafe;
+  }
+
+  .MuiButton-root.btn-operation{
+    padding: 8px 10px;
+    min-width: 20px;
+  }
+  
+  .MuiButton-root.btn-operation--delete{
+    margin-right: 10px;
+  }
+  
+  .btn-operation .MuiButton-startIcon {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
