@@ -10,9 +10,12 @@ function AccountList() {
   return (
     <Switch>
       <Route exact path={match.url} component={MainAccountListPage} />
-      <Route patch={`${match.url}/add`} component={AddEditAccountPage} />
-
-      <Route component={NotFound} />
+        <Route path={`${match.url}/add`} component={AddEditAccountPage} />
+        <Route 
+          path={`${match.url}/:accountId`} 
+          component={AddEditAccountPage}
+        />
+        <Route component={NotFound} />
     </Switch>
   );
 }

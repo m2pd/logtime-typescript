@@ -11,10 +11,6 @@ import InputNumberFiled from '../../../../custom-field/InputNumberFiled';
 import RadioTimeSheetField from '../../../../custom-field/RadioTimeSheetField';
 import SelectField from '../../../../custom-field/SelectField';
 import './AddEditForm.scss';
-import { checkRoles } from '../../../../utils/checkRoles'
-
-
-
 interface IProps{
   onSubmit: Function;
   initialValues: LogtimeEditPage;

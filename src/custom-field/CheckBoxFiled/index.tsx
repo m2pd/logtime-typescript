@@ -5,7 +5,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { useEffect } from 'react';
-
 interface PropsInputField {
   field: any;
   type: string;
@@ -27,19 +26,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
 function CheckBoxField(props: PropsInputField) {
-  const { field, form, type, label,size,disabled,variant, min, required }: any = props;
+  const { field, form }: any = props;
   const { name, value }: any = field;
   //field have name, vale, onChange, onBlur
 
-
-
   const classes = useStyles();
   const [state, setState] = React.useState({
-    admin: false,
-    leader: false,
-    common: true,
+    Admin: false,
+    Leader: false,
+    Common: true,
   });
 
   const listRoles:string[] = [];
@@ -59,31 +55,27 @@ function CheckBoxField(props: PropsInputField) {
   useEffect(() => {
     const changeEvent = listRoles.length > 0 ? listRoles : ['Common'] ;
     form.setFieldValue(name, changeEvent)
+
+    console.log(value)
   }, [state])
 
-  
-  // console.log({state})
-
-
-
-  const { admin, leader, common } = state;
-  const error = [admin, leader, common].filter((v) => v).length !== 2;
-
+  const { Admin, Leader, Common } = state;
+  // const error = [admin, leader, common].filter((v) => v).length !== 2;
 
   return (
     <FormControl component="fieldset" className={classes.formControl}>
       <FormLabel component="legend">Vai trò</FormLabel>
       <FormGroup row={true}>
         <FormControlLabel
-          control={<Checkbox checked={admin} value={false} onChange={handleChange} name="admin" />}
+          control={<Checkbox checked={Admin} value={Admin} onChange={handleChange} name="Admin" />}
           label="Admin"
         />
         <FormControlLabel
-          control={<Checkbox checked={leader} value={false} onChange={handleChange} name="leader" />}
+          control={<Checkbox checked={Leader} value={Leader} onChange={handleChange} name="Leader" />}
           label="Leader"
         />
         <FormControlLabel
-          control={<Checkbox checked={common} value={true} onChange={handleChange} name="common" />}
+          control={<Checkbox checked={Common} value={Common} onChange={handleChange} name="Common" />}
           label="Common"
         />
       </FormGroup>

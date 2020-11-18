@@ -1,36 +1,18 @@
-import React from 'react'
-import avatar from '../../logo.svg';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import './Sidebar.scss'
+import React from 'react';
+import { connect } from 'react-redux';
 // import AccordionComponent from '../Arcodion/Accordion.component';
 import { Link, NavLink } from 'react-router-dom';
-import {connect} from 'react-redux'
 import { UserCurrent } from '../../containers/Account/pages/Main';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-    },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      flexBasis: '33.33%',
-      flexShrink: 0,
-    },
-    secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary,
-    },
-  }),
-);
+import avatar from '../../logo.svg';
+import './Sidebar.scss';
 
 function Sidebar(props:any) {
-    const classes = useStyles();
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
     const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {

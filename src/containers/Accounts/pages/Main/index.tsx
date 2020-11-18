@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 import HeaderIntro from '../../../../components/HeaderIntro';
-import { User } from '../../../../constaints/interface';
 import { getAllUsers } from '../../../../redux/actions/userAction';
 import userService from '../../../../services/user.service';
 import { MainComponent } from '../../../Main';
 import AccountsList from '../../components/AccountsList';
 
 const MainAccountListPage: React.FC<IProps> = (props) =>{
+  const history = useHistory();
   const dispatch = useDispatch();
   const users = useSelector((state:any )=> state.users)
 
@@ -40,7 +41,9 @@ const MainAccountListPage: React.FC<IProps> = (props) =>{
   }
 
   const handleAccountEditClick = (values:any) => {
-    console.log(values[0])
+    console.log("Edit:",values)
+    const editUserUrl = `/accounts/${values[0]}` 
+    history.push(editUserUrl)
   }
 
   const onFetchAllUser = useCallback(
