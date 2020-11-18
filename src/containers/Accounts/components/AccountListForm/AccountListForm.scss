@@ -1,0 +1,28 @@
+.register-page-form{
+  max-width: 730px;
+  margin: 0 auto;
+
+  .MuiTextField-root{
+    margin-bottom: 1.5rem;
+  }
+
+  .MuiInputLabel-root {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  legend.MuiFormLabel-root {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  fieldset.MuiFormControl-root {
+    margin: 0;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  legend {
+    font-size: 22px;
+  }
+}

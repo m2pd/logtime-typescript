@@ -71,3 +71,13 @@ export interface User{
   active: boolean;
   roles : string[];
 }
+export interface UserRegister {
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  fullName: string;
+  active: boolean;
+  roles: string[];
+  team: string;
+}

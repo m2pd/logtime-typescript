@@ -1,6 +1,8 @@
-import { parseToken } from './../utils/parseToken';
 import axios from 'axios';
 import { API_ENDPOINT } from '../constaints';
+import { UserRegister } from '../constaints/interface';
+import { parseToken } from './../utils/parseToken';
+import authHeader from './auth-header';
 
 const url = 'api/Auth/login';
 
@@ -9,6 +11,7 @@ export interface UserType {
   password: string;
   ipLocal: string;
 }
+
 
 class AuthService {
   login(data: UserType) {
@@ -27,6 +30,12 @@ class AuthService {
   logout(): void {
     // localStorage.removeItem('user');
     localStorage.clear();
+  }
+
+  register(data:UserRegister){
+    return axios.post(`${API_ENDPOINT}api/Users`, data,{
+      headers: authHeader()
+    })
   }
 }
 

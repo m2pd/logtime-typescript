@@ -94,7 +94,7 @@ const AccountsList:React.FC<IProps> = props => {
       options: {
         customBodyRender:(value:any, tableMeta:any, updateValue:any) => {
         return (
-          <div className={value || 'block'} style={{textAlign: 'center'}}>
+          <div className={value ? "" : 'block'} style={{textAlign: 'center'}}>
             <Fragment>
               <Button
                 variant="contained"

@@ -6,6 +6,8 @@ import {
 } from './../redux/actions/messageAction';
 
 import {
+  RegisterAction,
+  RegisterFail,
   LoginSuccessAction,
   LoginFailAction,
   LogoutAction,
@@ -14,6 +16,8 @@ import {
 import { GetLogTime, GetLogTimeById } from '../redux/actions/logtimeAction';
 
 export enum ActionTypes {
+  registerSuccess,
+  registerFail,
   loginSuccess,
   loginFail,
   logout,
@@ -32,6 +36,8 @@ export enum ActionTypes {
 export type Action =
   | SetMessageAction
   | ClearMessageAction
+  | RegisterAction
+  | RegisterFail
   | LoginSuccessAction
   | LoginFailAction
   | LogoutAction

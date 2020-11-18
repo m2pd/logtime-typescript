@@ -8,6 +8,16 @@ const initialState = user
 
 export default function(state= initialState, action:Action){
     switch (action.type) {
+        case ActionTypes.registerSuccess:
+            return{
+                ...state,
+                isLoggedIn: false
+            }
+        case ActionTypes.registerFail:
+            return{
+                ...state,
+                isLoggedIn: false
+            }
         case ActionTypes.loginSuccess:
             return {
                 ...state,

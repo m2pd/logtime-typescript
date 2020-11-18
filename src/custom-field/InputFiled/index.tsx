@@ -29,6 +29,9 @@ function InputField(props: PropsInputField) {
       fullWidth
       disabled={disabled} 
       required={required}
+      InputLabelProps={{
+        shrink: true,
+      }}
     />
   );
 }

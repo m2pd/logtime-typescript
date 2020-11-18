@@ -1,3 +1,4 @@
+import { UserRegister } from './../../constaints/interface';
 import { UserCurrent } from './../../containers/Account/pages/Main/index';
 import { UserType } from './../../services/auth.service';
 import { Action, ActionTypes } from './../../constaints/type';
@@ -18,6 +19,49 @@ export interface LoginSuccessAction {
   export interface LogoutAction {
     type: ActionTypes.logout;
   }
+
+  export interface RegisterAction {
+    type: ActionTypes.registerSuccess;
+  }
+
+  export interface RegisterFail{
+    type: ActionTypes.registerFail
+  }
+
+export const register = (data:UserRegister) => (dispatch:Dispatch<Action>) =>{
+  return AuthService.register(data)
+  .then(res => {
+    dispatch({
+      type: ActionTypes.registerSuccess
+    })
+
+    return Promise.resolve();
+  },
+  error => {
+    const message =
+    (error.response &&
+      error.response.data &&
+      error.response.data.message) ||
+    error.message ||
+    error.toString();
+
+      dispatch({
+        type: ActionTypes.registerFail,
+      });
+
+      dispatch({
+        type: ActionTypes.setMessage,
+        payload: message,
+      });
+
+      toast.warn("Vui lòng thử lại !", {
+        position: toast.POSITION.TOP_LEFT
+      });
+
+      return Promise.reject();
+    }
+  )
+}
 
 export const login = (user:UserType) => (dispatch:Dispatch<Action>) => {
     return AuthService.login(user)

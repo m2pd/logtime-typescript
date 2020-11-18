@@ -21,6 +21,12 @@ class UserService {
     })
   }
 
+  deleteUser(id:number){
+    return axios.delete(`${API_ENDPOINT}api/Users/${id}`, {
+      headers: authHeader()
+    })
+  }
+
   getAllUsers(){
     return axios.get(`${API_ENDPOINT}api/Users`, {
       headers: authHeader()
