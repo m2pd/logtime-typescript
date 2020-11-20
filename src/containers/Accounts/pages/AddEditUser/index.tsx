@@ -7,6 +7,7 @@ import HeaderIntro from '../../../../components/HeaderIntro';
 import { UserRegister } from '../../../../constaints/interface';
 import authHeader from '../../../../services/auth-header';
 import AuthService from '../../../../services/auth.service';
+import logtimeService from '../../../../services/logtime.service';
 import userService from '../../../../services/user.service';
 import { MainComponent } from '../../../Main';
 import AccountListForm from '../../components/AccountListForm';
@@ -23,26 +24,20 @@ const AddEditAccountPage:React.FC<IProps> = props =>{
 
   useEffect(() => {
 
-    userService.getUserId(+accountId)
-    .then(res => {
-      const data = {
-        ...res.data,
-        roles: res.data.userRoles
-      }
-      setEditedAccount(data)
-    })
+    if(!isAddMode){
+      userService.getUserId(+accountId)
+      .then(res => {
+        const data = {
+          ...res.data,
+          roles: res.data.userRoles
+        }
+        setEditedAccount(data)
+      })
 
-    // userService.getUserId(+accountId)
-    // .then(res => console.log(res))
-    // axios.get('http://logtime.mitechcenter.vn/api/Logtime/byTeam',{
-    //   params:{
-    //     Team:1,
-    //     FromDate:'2020-10-10',
-    //     ToDate:'2020-11-11',
-    //   },
+    } else {
+      console.log('Chào mừng đến với trang đăng kí tài khoản');
+    }
 
-    //   headers: authHeader()
-    // })
   }, [])
 
   const initialValues = isAddMode ?  {
@@ -54,8 +49,6 @@ const AddEditAccountPage:React.FC<IProps> = props =>{
     roles : ['Common'],
     active: true,
   } : editedAccount;
-
-  console.log({initialValues})
   
   const handelSubmit = (values:any) => {
     console.log(values)

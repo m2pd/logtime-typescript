@@ -33,6 +33,17 @@ class LogtimeService {
       headers: authHeader()
     })
   }
+
+  getLogtimeByTeam(team: string, fromDate: string, toDate: string){
+    return axios.get(`${API_ENDPOINT}api/Logtime/byTeam`, {
+      params:{
+        Team:team,
+        FromDate: fromDate,
+        ToDate: toDate,
+      },
+      headers: authHeader()
+    })
+  }
 }
 
 export default new LogtimeService();

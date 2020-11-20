@@ -12,11 +12,15 @@
     th.MuiTableCell-root{
       background-color: #3c44b1;
       color:#fff;
-  }
-  
+    }
+
     tr.active{
         background-color: #3b3e66;
         transition: background-color 0.3s linear;
+
+        .MuiTableCell-root{
+          color: #fff;
+        }
         
         &:hover{
             // background-color: #ff4688fa;

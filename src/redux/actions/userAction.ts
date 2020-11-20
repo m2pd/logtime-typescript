@@ -33,6 +33,7 @@ export const getAllUsers = () => (dispatch:Dispatch<Action>) =>{
             type: ActionTypes.getAllUser,
             payload: res.data
         })
+        localStorage.setItem('users',JSON.stringify(res.data))
     })
 }
 

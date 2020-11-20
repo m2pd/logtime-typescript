@@ -9,11 +9,11 @@ interface IProps{
   disabled:boolean;
   options: string[];
   placeholder:string;
-  // onHandleChange: Function;
+  onHandleChange: Function;
 }
 
-function SelectField(props:IProps){
-  const { field, options, label, placeholder, disabled } = props;
+function SelectFieldOnchange(props:IProps){
+  const { field, options, label, placeholder, disabled, onHandleChange } = props;
   const { name, value } = field;
   const selectedOption = options.find((option:any) => option.value === value);
 
@@ -30,8 +30,8 @@ function SelectField(props:IProps){
     };
     field.onChange(changeEvent);
 
-    // //Form submit after Select change
-    // onHandleChange(selectedValue);
+    //Form submit after Select change
+    onHandleChange(selectedValue);
   }
   return(
     <Select
@@ -48,4 +48,4 @@ function SelectField(props:IProps){
   )
 }
 
-export default SelectField;
+export default SelectFieldOnchange;

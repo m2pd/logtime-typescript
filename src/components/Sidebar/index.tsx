@@ -148,6 +148,17 @@ function Sidebar(props:any) {
                                 <i className="icon fas fa-plus"></i>
                                 Thêm mới
                             </NavLink>
+                            {props.currentUser.userRoles.includes('Admin') &&
+                                <NavLink
+                                    exact
+                                    className="sidebar__link "
+                                    to="/timesheet/team"
+                                    activeClassName="sidebar__link--active"
+                                >
+                                    <i className="icon fas fa-layer-group"></i>
+                                    Team
+                                </NavLink>
+                            }
                         </Typography>
                         </AccordionDetails>
                     </Accordion>

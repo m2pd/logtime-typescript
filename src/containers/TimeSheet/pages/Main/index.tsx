@@ -130,8 +130,9 @@ function MainLoginPage(props:IProps) {
                         <p className="total">Total: {total}</p>
 
                         <TimeSheetList
-                            data={logtime}
+                            data={logtime.logtimeCurrent}
                             userRoles={userRoles}
+                            showDefault={true}
                             onTimeSheetEditClick={handleTimeSheetEditClick}
                             onTimeSheetRemoveClick={handleTimeSheetRemoveClick}
                             onTimeSheetViewDetailsClick={handleTimeSheetViewDetailsClick}

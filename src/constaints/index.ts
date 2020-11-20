@@ -1,3 +1,4 @@
+import { parseTeam } from './../utils/parseTeam';
 export const API_ENDPOINT = 'http://logtime.mitechcenter.vn/';
 
 export const ACTION_OPTIONS = [
@@ -11,4 +12,13 @@ export const ACTION_OPTIONS = [
   { value: '7', label:"Gặp khách hàng"},
   { value: '8', label:"Khác"},
 ]
+
+export const getUserOptions = () => {
+  const users = JSON.parse(localStorage.getItem('users') || '[]') ;
+  const getTeam = users.map((user:any) => !user.team ? '1' : user.team);
+  const uniqueTeam = new Set(getTeam);
+  
+  const listUser = (Array.from(uniqueTeam)).sort();
+  return parseTeam(listUser)
+}
 
