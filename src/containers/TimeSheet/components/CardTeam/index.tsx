@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
-import {useSelector} from 'react-redux';
-import CardTeamItem from '../CardTeamItem';
 import Grid from '@material-ui/core/Grid';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import CardTeamItem from '../CardTeamItem';
 import TimeSheetList from '../TimeSheetList';
 import './CardTeam.scss';
 

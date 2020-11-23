@@ -1,9 +1,7 @@
 import { Button } from '@material-ui/core';
-import { Formik, Form, FastField, Field } from 'formik';
-import React from 'react'
+import { FastField, Field, Form, Formik } from 'formik';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import CheckBoxDefaultField from '../../../../custom-field/CheckBoxDefault';
-import CheckBoxField from '../../../../custom-field/CheckBoxFiled';
 import InputField from '../../../../custom-field/InputFiled';
 import RadioTimeSheetField from '../../../../custom-field/RadioTimeSheetField';
 import './AccountListForm.scss';

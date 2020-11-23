@@ -10,16 +10,18 @@ interface PropsInputFieldOnChange {
   required:boolean;
   variant?:string;
   fullWidth?:boolean;
+  onGetDay: Function;
 }
 
 function InputFieldOnChange(props: PropsInputFieldOnChange) {
-  const { field, type, label,size,disabled,variant, fullWidth,required }: any = props;
-  const { name }: any = field;
+  const { field, type, label,size,disabled,variant, fullWidth,required, onGetDay }: any = props;
+  const { name, value }: any = field;
   //field have name, vale, onChange, onBlur
   return (
     <TextField
       id={name}
       label={label}
+      onChange={onGetDay(value)}
       {...field}
       name={name}
       type={type}

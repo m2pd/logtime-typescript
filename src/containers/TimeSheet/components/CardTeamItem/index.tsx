@@ -26,8 +26,8 @@ const useStyles = makeStyles({
     height: 300,
   },
   paper: {
-    margin: 15,
-    fontFamily: 'Poppins'
+    marginRight: 15,
+    fontFamily: 'Poppins',
   }
 });
 
@@ -35,7 +35,7 @@ const CardTeamItem: React.FC<IProps> = (props) => {
   const history = useHistory();
   const classes = useStyles();
   const { card } = props;
-  console.log(card)
+  // console.log(card)
   return (
     <Grid item xs={4} className="card">
       <Card className={classes.paper}>

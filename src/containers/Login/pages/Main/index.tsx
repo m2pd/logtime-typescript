@@ -51,8 +51,8 @@ function MainLoginPage(props:IProps) {
   }
 
   const handleSubmit = (values:any,actions:any) => {
-    console.log('Form Submit:', values);
-    console.log('action Submit:', actions);
+    // console.log('Form Submit:', values);
+    // console.log('action Submit:', actions);
     const { dispatch, history } = props;
     dispatch(login(values))
     .then(() => {

@@ -1,13 +1,9 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import swal from 'sweetalert';
 import HeaderIntro from '../../../../components/HeaderIntro';
-import { UserRegister } from '../../../../constaints/interface';
-import authHeader from '../../../../services/auth-header';
 import AuthService from '../../../../services/auth.service';
-import logtimeService from '../../../../services/logtime.service';
 import userService from '../../../../services/user.service';
 import { MainComponent } from '../../../Main';
 import AccountListForm from '../../components/AccountListForm';
@@ -38,7 +34,7 @@ const AddEditAccountPage:React.FC<IProps> = props =>{
       console.log('Chào mừng đến với trang đăng kí tài khoản');
     }
 
-  }, [])
+  }, [accountId, isAddMode])
 
   const initialValues = isAddMode ?  {
     fullName: '',
@@ -51,7 +47,7 @@ const AddEditAccountPage:React.FC<IProps> = props =>{
   } : editedAccount;
   
   const handelSubmit = (values:any) => {
-    console.log(values)
+    // console.log(values)
     if(isAddMode){
       AuthService.register(values)
       .then(res => {
@@ -68,7 +64,7 @@ const AddEditAccountPage:React.FC<IProps> = props =>{
       .then(res => {
         swal("Yeahhh!", "Cập nhật thành công rồi nha 😍", "success");
         history.push('/accounts')
-        console.log(res)
+        // console.log(res)
       })
       .catch(err =>{
         toast.error("Cậu chưa nhập đầy đủ thông tin đâu 🤨", {

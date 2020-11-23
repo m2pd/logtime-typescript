@@ -45,8 +45,8 @@ const AddEditForm:React.FC<IProps> = props =>{
     setInitValues(initialValues)
   }, [initialValues])
 
-  console.log(initialValues)
-  console.log(enableTextFiled)
+  // console.log(initialValues)
+  // console.log(enableTextFiled)
   return(
     <div className="timehseet-form">
       <Formik enableReinitialize initialValues={initValues} onSubmit={onSubmit}>
@@ -58,7 +58,7 @@ const AddEditForm:React.FC<IProps> = props =>{
           return(
             <Form className='page-form account-page-form'>
               <Grid container justify="center">
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   <FastField
                     name="date"
                     label="Thời gian"
@@ -70,7 +70,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                   />
                 </Grid>
 
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   <FastField
                       name="cost"
                       label="Số giờ"
@@ -82,7 +82,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                   />
                 </Grid>
 
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   <FastField
                       name="title"
                       label="Công việc"
@@ -94,7 +94,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                   />
                 </Grid>
 
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   <FastField
                       name="projectTitle"
                       label="Dự án"
@@ -106,7 +106,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                   />
                 </Grid>
 
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   <FastField
                       name="description"
                       label="Mô tả"
@@ -117,7 +117,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                   />
                 </Grid>
 
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   <FastField
                       name="overtime"
                       label="Hình thức"
@@ -128,7 +128,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                   />
                 </Grid>
                 
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   <FastField
                     name="activity"
                     className="timesheet-item select-field"
@@ -143,7 +143,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                 </Grid>
                 {/* Show block TextFiled */}
                 {!enableTextFiled &&
-                  <Grid item spacing={3} xs={8}>
+                  <Grid item xs={8}>
                     <FastField
                         name="comment"
                         label="Bình luận"
@@ -160,7 +160,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                   // checkRoles('Admin' || 'Leader')
                   && (
                       <Fragment>
-                        <Grid item spacing={3} xs={8}>
+                        <Grid item xs={8}>
                           <FastField
                               name="enable"
                               label="Khóa Logtime"
@@ -171,7 +171,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                               required={true}
                           />
                         </Grid>
-                        <Grid item spacing={3} xs={8}>
+                        <Grid item xs={8}>
                           <FastField
                               name="comment"
                               label="Bình luận"
@@ -185,7 +185,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                     )
                 }
 
-                <Grid item spacing={3} xs={8}>
+                <Grid item xs={8}>
                   {enableTextFiled && 
                     <Button className="btn btn-timesheet" type='submit' variant='contained' color='primary'>
                       {isAddMode ? 'Thêm mới' : 'Cập nhật'}

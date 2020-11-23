@@ -3,12 +3,12 @@
 //   label: string;
 // }
 
-export const parseTeam = (listTeam:any) => {
+export const parseTeam = (listTeam:any, label?:string, value?:string) => {
   
   let optionUser = listTeam.map((user:any) => (
     {
-      label: 'Team ' + user,
-      value: user,
+      label: `${label ? label : ''} ${user}`,
+      value:`${value ? user.value : user }`  ,
     }
   ))
 

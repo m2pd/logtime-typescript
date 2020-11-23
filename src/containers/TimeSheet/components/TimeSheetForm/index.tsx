@@ -1,14 +1,17 @@
-import { Button } from '@material-ui/core';
 import { FastField, Form, Formik } from 'formik';
 import React from 'react';
 import { connect } from 'react-redux';
+// import { getSelectOptions } from '../../../../constaints';
 import InputFieldOnChange from '../../../../custom-field/InputFieldOnChange';
-import SelectField from '../../../../custom-field/SelectField';
+import SelectFieldOnchange from '../../../../custom-field/SelectFieldOnchange';
 import { parseListUsers } from '../../../../utils/parseListUsers';
 import { UserCurrent } from '../../../Account/pages/Main';
 import './TimeSheetForm.scss';
 
 interface IProps{
+  onHandleChange: Function;
+  onGetDayStart: Function;
+  onGetDayEnd: Function;
   FromDate: string;
   ToDate: string;
   onSubmit: any;
@@ -24,17 +27,15 @@ interface initialValues{
 
 
 const TimeSheetForm:React.FC<IProps> = props =>{
-  const {FromDate, ToDate, id, onSubmit, userRoles}:IProps = props;
-  const {users}:any = props;
-  const listUser:UserCurrent[] = users.users;
+  const {FromDate, ToDate, id, onSubmit, userRoles, onGetDayStart, onGetDayEnd, onHandleChange }:IProps = props;
+  // const {users}:any = props;
+  const listUser:UserCurrent[]  = JSON.parse(localStorage.getItem('users') || '[]') ;
   
   const initialValues:initialValues ={
     FromDate: FromDate,
     ToDate: ToDate,
     id:id,
   }
-  
-  const optionsValueUsers = parseListUsers(listUser)
 
   return(
     <div className={`${userRoles.includes('Leader') ? 'admin' : '' } timesheet-form`} >
@@ -49,6 +50,7 @@ const TimeSheetForm:React.FC<IProps> = props =>{
                 name="FromDate"
                 label="Từ ngày"
                 type="date"
+                onGetDay={onGetDayStart}
                 component={InputFieldOnChange}
                 size="small"
               />
@@ -58,6 +60,7 @@ const TimeSheetForm:React.FC<IProps> = props =>{
                 name="ToDate"
                 label="Đến ngày"
                 type="date"
+                onGetDay={onGetDayEnd}
                 component={InputFieldOnChange}
                 size="small"
               />
@@ -67,17 +70,18 @@ const TimeSheetForm:React.FC<IProps> = props =>{
                 &&  <FastField
                   name="id"
                   className="timesheet-item select-field"
-                  component={SelectField}
-
+                  component={SelectFieldOnchange}
+                  
+                  onHandleChange={onHandleChange}
                   label="Nhân viên"
                   placeholder='Chọn nhân viên ???'
-                  options={optionsValueUsers}
+                  options={parseListUsers(listUser)}
                 />
               }   
-
+{/* 
               <Button type='submit' variant='outlined' color='primary'>
                 Cập nhật
-              </Button>
+              </Button> */}
             </Form>
           )
         }}

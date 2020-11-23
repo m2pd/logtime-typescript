@@ -72,7 +72,7 @@ export const login = (user:UserType) => (dispatch:Dispatch<Action>) => {
         });
         
         const idUser = JSON.parse(localStorage.getItem('infoUser') || "{}") ;
-        console.log(idUser.id)
+        // console.log(idUser.id)
         userService.getUserId(idUser.id)
         .then(res => {
           dispatch({

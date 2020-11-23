@@ -56,7 +56,6 @@ function CheckBoxField(props: PropsInputField) {
     const changeEvent = listRoles.length > 0 ? listRoles : ['Common'] ;
     form.setFieldValue(name, changeEvent)
 
-    console.log(value)
   }, [state])
 
   const { Admin, Leader, Common } = state;

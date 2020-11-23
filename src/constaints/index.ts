@@ -13,12 +13,12 @@ export const ACTION_OPTIONS = [
   { value: '8', label:"Khác"},
 ]
 
-export const getUserOptions = () => {
+export const getSelectOptions = (item:string, label?:string) => {
   const users = JSON.parse(localStorage.getItem('users') || '[]') ;
-  const getTeam = users.map((user:any) => !user.team ? '1' : user.team);
+  const getTeam = users.map((user:any) => !user[`${item}`] ? '1' : user[`${item}`]);
   const uniqueTeam = new Set(getTeam);
   
   const listUser = (Array.from(uniqueTeam)).sort();
-  return parseTeam(listUser)
+  return parseTeam(listUser, label)
 }
 

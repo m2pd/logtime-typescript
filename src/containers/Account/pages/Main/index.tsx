@@ -71,8 +71,8 @@ function MainAccountPage(props: IProps) {
   const onEdit = (values:any, actions:any):void  =>{
     //Cancel submit status
     actions.setSubmitting(false);
-    console.log(values)
-    console.log(values.fullName)
+    // console.log(values)
+    // console.log(values.fullName)
     const data = Object.assign({},infoUser,{
       fullName: values.fullName,
       phoneNumber: values.phoneNumber,

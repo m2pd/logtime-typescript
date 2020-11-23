@@ -18,8 +18,6 @@ function SelectField(props:IProps){
   const selectedOption = options.find((option:any) => option.value === value);
 
   const handleSelectedOptionChange = (selectedOption:any) => {
-    console.log(selectedOption)
-    console.log(value)
     const selectedValue = selectedOption ? selectedOption.value : selectedOption;
 
     const changeEvent = {

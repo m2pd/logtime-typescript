@@ -197,8 +197,8 @@ const TimeSheetList:React.FC<IProps> = (props) => {
 
   const options:any = {
     filterType: 'dropdown',
-    selectableRows:false,
-    responsive: "scroll",
+    selectableRows: 'none',
+    responsive: "vertical",
     fixedHeader: true,
     textLabels: {
       body: {

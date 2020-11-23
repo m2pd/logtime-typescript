@@ -39,7 +39,6 @@ const AddEditTimeSheetPage:React.FC<IProps> = props =>{
     .catch(err => console.log(err))
   }, [timesheetId])
 
-  console.log({timesheetId,editedTimeSheet})
   const FromDateDefault:string = dayjs(new Date()).format('YYYY-MM-DD');
 
   const initialValues:any = isAddMode
@@ -62,7 +61,6 @@ const AddEditTimeSheetPage:React.FC<IProps> = props =>{
   const {currentUser: {id, userRoles}} =  props;
 
   const handleSubmit = (values:LogtimeEditPage) => {
-    console.log(values)
     const isAdmin:boolean = userRoles.includes('Admin');
     const isUserSelected = isAdmin ? values.userId : id;
 

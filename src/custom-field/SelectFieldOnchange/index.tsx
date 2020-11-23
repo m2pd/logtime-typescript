@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-
 interface IProps{
   field: any;
   type: string;
@@ -18,8 +17,6 @@ function SelectFieldOnchange(props:IProps){
   const selectedOption = options.find((option:any) => option.value === value);
 
   const handleSelectedOptionChange = (selectedOption:any) => {
-    console.log(selectedOption)
-    console.log(value)
     const selectedValue = selectedOption ? selectedOption.value : selectedOption;
 
     const changeEvent = {

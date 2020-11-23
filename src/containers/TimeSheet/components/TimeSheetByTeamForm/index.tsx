@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-
+import Grid from '@material-ui/core/Grid';
 import { FastField, Form, Formik } from 'formik';
-import SelectField from '../../../../custom-field/SelectField';
-import { ACTION_OPTIONS, getUserOptions } from '../../../../constaints';
-import { Button } from '@material-ui/core';
-import logtimeService from '../../../../services/logtime.service';
-import './TimeSheetByTeamForm.scss';
-import { parseTeam } from '../../../../utils/parseTeam';
+import React, { useState } from 'react';
+import { getSelectOptions } from '../../../../constaints';
+import InputFieldOnChange from '../../../../custom-field/InputFieldOnChange';
 import SelectFieldOnchange from '../../../../custom-field/SelectFieldOnchange';
-
+import './TimeSheetByTeamForm.scss';
 interface IProps{
   onHandleChange: Function;
+  onGetDayStart: Function;
+  onGetDayEnd: Function;
+  initialValues: {
+    FromDate: string,
+    ToDate: string,
+    activity: string,
+  }
 };
 
 const TimeSheetByTeamForm : React.FC<IProps> = (props) => {
-  const {onHandleChange} =  props;
-  const initialValues = {};
-  const [teamOption, setTeamOption] = useState(getUserOptions())
+  const {onHandleChange, onGetDayStart, onGetDayEnd, initialValues} =  props;
+  const [teamOption] = useState(getSelectOptions('team', 'Team'))
+  // console.log(getSelectOptions('team', 'Team'))
 
   const onSubmit = (values:any) => {
     console.log(values)
@@ -29,17 +31,43 @@ const TimeSheetByTeamForm : React.FC<IProps> = (props) => {
         {(formikProps) => {
           return(
             <Form>
-              <FastField
-                name="activity"
-                className="timesheet-item select-field"
-                component={SelectFieldOnchange}
+              <Grid container spacing={3}>
+                <Grid item md={3}>
+                  <FastField
+                    className="timesheet-item"
+                    name="FromDate"
+                    label="Từ ngày"
+                    type="date"
+                    onGetDay={onGetDayStart}
+                    component={InputFieldOnChange}
+                    size="small"
+                  />
+                </Grid>
+                <Grid item md={3}>
+                  <FastField
+                    className="timesheet-item"
+                    name="ToDate"
+                    label="Đến ngày"
+                    type="date"
+                    onGetDay={onGetDayEnd}
+                    component={InputFieldOnChange}
+                    size="small"
+                  />
+                </Grid>
+                <Grid item md={6}>
+                <FastField
+                    name="activity"
+                    className="timesheet-item select-field"
+                    component={SelectFieldOnchange}
 
-                label="Nhân viên"
-                placeholder='Chọn Team ???'
-                onHandleChange={onHandleChange}
-                options={teamOption}
-                required={true}
-              />
+                    label="Nhân viên"
+                    placeholder='Chọn Team ???'
+                    onHandleChange={onHandleChange}
+                    options={teamOption}
+                    required={true}
+                  />
+                </Grid>
+              </Grid>
             </Form>
           )
         }}

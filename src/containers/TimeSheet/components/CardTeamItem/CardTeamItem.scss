@@ -6,9 +6,10 @@
   }
 
   &__title {
-    font-size: 22px;
+    font-size: 18px;
     display: flex;
     align-items: center;
+    flex-grow: 1;
 
     .icon-block {
       font-size: 16px;
@@ -19,6 +20,9 @@
 
   .socials {
     margin-left: auto;
+    flex: 0 0 80px;
+    display: flex;
+
     a {
       color: #3B3E66;
       font-size: 16px;

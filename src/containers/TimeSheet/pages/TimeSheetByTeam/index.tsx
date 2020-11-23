@@ -1,21 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderIntro from '../../../../components/HeaderIntro';
 import logtimeService from '../../../../services/logtime.service';
 import { MainComponent } from '../../../Main';
 import CardTeam from '../../components/CardTeam';
 import TimeSheetByTeamForm from '../../components/TimeSheetByTeamForm';
+import { default as dayjs } from 'dayjs'
+
 
 interface IProps {}
 
 const TimeSheetByTeam:React.FC<IProps> = (props) => {
   const [data, setData] = useState([])
 
-  const onHandleChange = (values:any) => {
-    logtimeService.getLogtimeByTeam(values, '2020-10-10', '2020-11-11')
-    .then(res => setData(res.data))
+  const [values, setValues]:any = useState('1');
+  const FromDateDefault:string = dayjs().day(1).format('YYYY-MM-DD');
+  const ToDateDefault:string = dayjs().day(6).format('YYYY-MM-DD');
+
+  const [fromDay, setFromDay] = useState(FromDateDefault)
+  const [toDay, setToDay] = useState(ToDateDefault) 
+
+  const initialValues = {
+    FromDate: FromDateDefault,
+    ToDate: ToDateDefault,
+    activity: values,
   }
+
+  const onHandleChange = (values:any) => {
+    setValues(values)
+  }
+
+  const onGetDayStart = (values:any) => {
+    setFromDay(values)
+  }
+
+  const onGetDayEnd = (values:any) => {
+    setToDay(values)
+  }
+
+  useEffect(() => {
+    logtimeService.getLogtimeByTeam(values, fromDay, toDay)
+    .then(res => setData(res.data))
+  }, [values, fromDay, toDay])
   
-  console.log(data)
   return(
     <div>
       <MainComponent>
@@ -27,6 +53,9 @@ const TimeSheetByTeam:React.FC<IProps> = (props) => {
           <h1>Hello team</h1>
           <TimeSheetByTeamForm
            onHandleChange={onHandleChange}
+           onGetDayStart={onGetDayStart}
+           onGetDayEnd={onGetDayEnd}
+           initialValues={initialValues}
           />
           <CardTeam
             data={data}

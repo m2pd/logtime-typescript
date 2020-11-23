@@ -23,23 +23,44 @@ function MainLoginPage(props:IProps) {
     const {currentUser:{id, userRoles}, logtime} = props;
     const history = useHistory();
 
-    console.log(userRoles)
-    const [idUser, setIdUser] = useState(id)
+    // console.log(userRoles)
+    // const [idUser, setIdUser] = useState(id)
     const FromDateDefault:string = dayjs().day(1).format('YYYY-MM-DD');
     const ToDateDefault:string = dayjs().day(6).format('YYYY-MM-DD');
 
+    const [idValues, setValues]:any = useState(id);
     const [fromDay, setFromDay] = useState(FromDateDefault)
     const [toDay, setToDay] = useState(ToDateDefault)
     //FromDate, ToDate have type are string or Date (* Date)
     // const FromDate:any = dayjs().day(1).format('YYYY-MM-DD');
 
+    const onHandleChange = (values:any) => {
+        setValues(values)
+      }
+    
+      const onGetDayStart = (values:any) => {
+        setFromDay(values)
+      }
+    
+      const onGetDayEnd = (values:any) => {
+        setToDay(values)
+      }
+
     const dispatch = useDispatch(); 
     //use useCallback check render change up memo
-    const onFetchLogtime = useCallback(
+    // const onFetchLogtime = useCallback(
+    //     () => {
+    //         dispatch(getLogtime(idUser,fromDay,toDay))
+    //         // console.log(idUser,fromDay,toDay)
+    //     },
+    //     [dispatch,idUser,fromDay,toDay]
+    // )
+
+    const onFetchLogTimeOnChange = useCallback(
         () => {
-            dispatch(getLogtime(idUser,fromDay,toDay))
-        },
-        [dispatch,idUser,fromDay,toDay]
+            dispatch(getLogtime(idValues,fromDay,toDay))
+        },       
+        [dispatch,idValues,fromDay,toDay]
     )
 
     const onFetchAllUser = useCallback(
@@ -53,19 +74,20 @@ function MainLoginPage(props:IProps) {
         const {FromDate, ToDate, id} = values;
         setFromDay(FromDate)
         setToDay(ToDate)
-        setIdUser(id)
-        console.log(values)
+        setValues(id)
     }
  
     useEffect(() => {
-        onFetchLogtime();
+        // onFetchLogtime();
         onFetchAllUser();
+        onFetchLogTimeOnChange();
 
-    }, [onFetchLogtime, onFetchAllUser])
+        // dispatch(getLogtime(idValues,fromDay,toDay))
+    }, [onFetchAllUser, onFetchLogTimeOnChange, idValues, fromDay, toDay])
 
 
     const getAllLogtime:any = logtime.logtimeCurrent;
-    console.log(getAllLogtime)
+    // console.log(getAllLogtime)
     const total:number = totalHours(getAllLogtime)
 
     const handleTimeSheetEditClick = (sheet:any) =>{
@@ -98,7 +120,7 @@ function MainLoginPage(props:IProps) {
                 logtimeService.deleteLogtimeById(sheet[0])
                 .then(res => {
                     //re-render after remove logtime
-                    onFetchLogtime();
+                    onFetchLogTimeOnChange();
                 })
                 .catch(err => console.log(err))
                 
@@ -123,6 +145,9 @@ function MainLoginPage(props:IProps) {
                             FromDate={fromDay}
                             ToDate={toDay}
                             onSubmit={getValuesDate}
+                            onHandleChange={onHandleChange}
+                            onGetDayStart={onGetDayStart}
+                            onGetDayEnd={onGetDayEnd}
                             id={id}
                             userRoles={userRoles}
                         />

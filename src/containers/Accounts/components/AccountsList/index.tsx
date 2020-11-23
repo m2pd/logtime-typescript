@@ -127,8 +127,8 @@ const AccountsList:React.FC<IProps> = props => {
 
 const options:any = {
   filterType: 'checkbox',
-  selectableRows:false,
-  responsive: 'scroll',
+  selectableRows: 'none',
+  responsive: 'vertical ',
   textLabels: {
     body: {
       noMatch: 'Không tìm thấy kết quả'
@@ -142,7 +142,7 @@ const options:any = {
   },
   //Custom row render check has is enable block
   setRowProps: (row: any, dataIndex: number, rowIndex: number) => {
-    console.log(row[7].props.className)
+    // console.log(row[7].props.className)
     if(row[7].props.className === 'block'){
       return{
         className: 'active'

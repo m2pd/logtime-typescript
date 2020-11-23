@@ -41,7 +41,7 @@ const MainAccountListPage: React.FC<IProps> = (props) =>{
   }
 
   const handleAccountEditClick = (values:any) => {
-    console.log("Edit:",values)
+    // console.log("Edit:",values)
     const editUserUrl = `/accounts/${values[0]}` 
     history.push(editUserUrl)
   }
@@ -57,7 +57,7 @@ const MainAccountListPage: React.FC<IProps> = (props) =>{
     onFetchAllUser();
   }, [onFetchAllUser])
 
-  console.log(users)
+  // console.log(users)
   return(
     <div>
       <MainComponent>
