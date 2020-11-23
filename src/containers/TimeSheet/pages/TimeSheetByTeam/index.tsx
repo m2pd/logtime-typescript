@@ -5,12 +5,16 @@ import { MainComponent } from '../../../Main';
 import CardTeam from '../../components/CardTeam';
 import TimeSheetByTeamForm from '../../components/TimeSheetByTeamForm';
 import { default as dayjs } from 'dayjs'
+import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert'
+
 
 
 interface IProps {}
 
 const TimeSheetByTeam:React.FC<IProps> = (props) => {
   const [data, setData] = useState([])
+  const history = useHistory();
 
   const [values, setValues]:any = useState('1');
   const FromDateDefault:string = dayjs().day(1).format('YYYY-MM-DD');
@@ -37,9 +41,46 @@ const TimeSheetByTeam:React.FC<IProps> = (props) => {
     setToDay(values)
   }
 
-  useEffect(() => {
+  const handleTimeSheetEditClick = (sheet:any) =>{
+    console.log("Edit:",sheet)
+    const editSheetUrl = `/timesheet/${sheet[0]}` 
+    history.push(editSheetUrl)
+  }
+
+  const handleTimeSheetRemoveClick = (sheet:any) =>{
+    // sheet: [3609, "2020-10-31T00:00:00", 4, "Tìm hiểu Custom hook trong ReactJS", "Nghiên cứu", "Tìm hiểu Custom hook trong ReactJS", false, "5", undefined]
+    swal({
+        title: "Có chắc là muốn xóa không?",
+        text: "Chắc rồi thì nhấn OK đi",
+        icon: "warning",
+        buttons:  ["Thôi, không xóa nữa đâu!", "OK nè !"],
+        dangerMode: true,
+    })
+    .then((willUpdate) => {
+        if (willUpdate) {
+            logtimeService.deleteLogtimeById(sheet[0])
+            .then(res => {
+                //re-render after remove logtime
+                getLogtimeByTeam();
+            })
+            .catch(err => console.log(err))
+            
+            swal("Cập nhật thành công", {
+                icon: "success",
+            });
+        } else {
+            swal("Suy nghĩ kĩ rồi mới sữa nghen <3");
+        }
+    });
+  }
+
+  const getLogtimeByTeam = () => {
     logtimeService.getLogtimeByTeam(values, fromDay, toDay)
     .then(res => setData(res.data))
+  }
+
+  useEffect(() => {
+    getLogtimeByTeam();
   }, [values, fromDay, toDay])
   
   return(
@@ -59,6 +100,9 @@ const TimeSheetByTeam:React.FC<IProps> = (props) => {
           />
           <CardTeam
             data={data}
+            onTimeSheetEditClick={handleTimeSheetEditClick}
+            onTimeSheetRemoveClick={handleTimeSheetRemoveClick}
+            // onTimeSheetViewDetailsClick={handleTimeSheetViewDetailsClick}
           />
 
           {/* <TimeSheetList

@@ -6,25 +6,20 @@ import TimeSheetList from '../TimeSheetList';
 import './CardTeam.scss';
 
 interface IProps {
-  data: any
+  data: any;
+  onTimeSheetEditClick: Function;
+  onTimeSheetRemoveClick: Function;
 };
 
 const CardTeam:React.FC<IProps> = (props) => {
-  const { data } = props;
+  const { data, onTimeSheetEditClick, onTimeSheetRemoveClick } = props;
   const currentUser = useSelector((state: any) => state.currentUser);
   const userRoles = currentUser.userRoles;
 
-  const onTimeSheetRemoveClick = (values:any) => {
+  const onTimeSheetViewDetailsClick = (values: any) => {
     console.log(values)
   }
 
-  const onTimeSheetViewDetailsClick = (values:any) =>{
-    console.log(values)
-  }
-
-  const onTimeSheetEditClick = (values:any) => {
-    console.log(values)
-  }
   return (
     <div>
       <Grid
