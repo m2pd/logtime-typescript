@@ -1,12 +1,12 @@
-import React from 'react';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect, withRouter } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {connect} from 'react-redux';
-import './Breadscrums.scss';
 import { logout } from '../../redux/actions/authAction';
+import './Breadscrums.scss';
 
 interface IProps {
   user: any;
@@ -36,18 +36,18 @@ const BreadcrumbsComponent = (props:IProps) => {
     return (
     <div className="breadcrumb-content"> 
       <Breadcrumbs separator="›" aria-label="breadcrumb">
-            <Link onClick={() => history.push("/")}>Home</Link>
+            <Link className="breadcrumb-item" onClick={() => history.push("/dashboard")}>Home</Link>
         {
             pathnames.map((name:string,index:number) =>{
                 const routeTo = `/${pathnames.slice(0,index + 1).join("/")}`;
                 const isLast = index === pathnames.length - 1;
                 return isLast 
                 ?   
-                        <Link key={index} color="inherit" onClick={() => history.push(routeTo)}>{name}</Link>
+                        <Link className="breadcrumb-item active" key={index} color="textPrimary" onClick={() => history.push(routeTo)}>{name}</Link>
                     
                 : (
                     
-                        <Link key={index} color="textPrimary" onClick={() => history.push(routeTo)}>{name}</Link>
+                        <Link className="breadcrumb-item" key={index}  color="inherit" onClick={() => history.push(routeTo)}>{name}</Link>
                     
                     )
             })

@@ -7,8 +7,7 @@ function Account() {
   const match = useRouteMatch();
   return (
     <Switch>
-      <Route exact path={match.url} component={MainAccountPage} />
-
+      <Route exact path={match.url} component={MainAccountPage} />a
       <Route component={NotFound} />
     </Switch>
   );

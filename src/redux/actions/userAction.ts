@@ -7,10 +7,15 @@ export interface GetUser{
     payload: any
 }
 
+export interface GetAllUsers{
+    type: ActionTypes.getAllUser,
+    payload: any
+}
 export interface UpdateUser{
     type: ActionTypes.updateUser,
     payload: any
 }
+
 export const getUser = (id:number) => (dispatch:Dispatch<Action>) =>{
     return userService.getUserId(id)
     .then(res => {
@@ -18,6 +23,17 @@ export const getUser = (id:number) => (dispatch:Dispatch<Action>) =>{
             type:ActionTypes.getUser,
             payload: res.data
         })
+    })
+}
+
+export const getAllUsers = () => (dispatch:Dispatch<Action>) =>{
+    return userService.getAllUsers()
+    .then(res =>{
+        dispatch({
+            type: ActionTypes.getAllUser,
+            payload: res.data
+        })
+        localStorage.setItem('users',JSON.stringify(res.data))
     })
 }
 

@@ -1,13 +1,23 @@
-import React from 'react'
-import avatar from '../../logo.svg';
-
-import './Sidebar.scss'
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React from 'react';
+import { connect } from 'react-redux';
 // import AccordionComponent from '../Arcodion/Accordion.component';
 import { Link, NavLink } from 'react-router-dom';
-import {connect} from 'react-redux'
 import { UserCurrent } from '../../containers/Account/pages/Main';
+import avatar from '../../logo.svg';
+import './Sidebar.scss';
 
 function Sidebar(props:any) {
+    const [expanded, setExpanded] = React.useState<string | false>(false);
+
+    const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
     return (
         <div className="sidebar">
             <div className="sidebar-header">
@@ -33,7 +43,7 @@ function Sidebar(props:any) {
                     Bảng chức năng
                 </div>
                 <div className="sidebar__menu">
-                    <NavLink
+                    {/* <NavLink
                         exact
                         className="sidebar__link"
                         to="/account"
@@ -50,8 +60,8 @@ function Sidebar(props:any) {
                     >
                         <i className="icon fas fa-calendar"></i>
                         Danh sách
-                    </NavLink>
-                    <NavLink
+                    </NavLink> */}
+                    {/* <NavLink
                         exact
                         className="sidebar__link "
                         to="/timesheet/add"
@@ -59,9 +69,101 @@ function Sidebar(props:any) {
                     >
                         <i className="icon fas fa-plus"></i>
                         Thêm mới
-                    </NavLink>
+                    </NavLink> */}
+                                        {
+                    props.currentUser.userRoles.includes('Admin')
+                    ? <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1bh-content"
+                            id="panel1bh-header"
+                        >
+                            <Typography className="sidebar__link">
+                            <i className="icon fas fa-user-alt"></i>
+                                Tài khoản
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography className="sidebar__link--item">
+                                <NavLink
+                                    exact
+                                    className="sidebar__link "
+                                    to="/accounts"
+                                    activeClassName="sidebar__link--active"
+                                >
+                                    <i className="icon fas fa-calendar"></i>
+                                    Danh sách
+                                </NavLink>
+                                <NavLink
+                                    exact
+                                    className="sidebar__link "
+                                    to="/accounts/add"
+                                    activeClassName="sidebar__link--active"
+                                >
+                                    <i className="icon fas fa-plus"></i>
+                                    Thêm mới
+                                </NavLink>
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    : <NavLink
+                            exact
+                            className="sidebar__link "
+                            to="/account"
+                            activeClassName="sidebar__link--active"
+                        >
+                            <i className="icon fas fa-calendar"></i>
+                            Tài khoản
+                        </NavLink>
+                    }
+                    <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel2bh-content"
+                            id="panel2bh-header"
+                        >
+                            <Typography className="sidebar__link">
+                            <i className="icon fas fa-user-clock "></i>
+                                Time Sheet
+                            </Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                        <Typography className="sidebar__link--item">
+                            <NavLink
+                                exact
+                                className="sidebar__link "
+                                to="/timesheet"
+                                activeClassName="sidebar__link--active"
+                            >
+                                <i className="icon fas fa-calendar"></i>
+                                Danh sách
+                            </NavLink>
+                            <NavLink
+                                exact
+                                className="sidebar__link "
+                                to="/timesheet/add"
+                                activeClassName="sidebar__link--active"
+                            >
+                                <i className="icon fas fa-plus"></i>
+                                Thêm mới
+                            </NavLink>
+                            {props.currentUser.userRoles.includes('Admin') &&
+                                <NavLink
+                                    exact
+                                    className="sidebar__link "
+                                    to="/timesheet/team"
+                                    activeClassName="sidebar__link--active"
+                                >
+                                    <i className="icon fas fa-layer-group"></i>
+                                    Team
+                                </NavLink>
+                            }
+                        </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    {/* <AccordionComponent/> */}
                 </div>
-                {/* <AccordionComponent/> */}
             </div>
         </div>
     )

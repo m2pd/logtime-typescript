@@ -79,8 +79,58 @@
         }
 
         .icon{
-            margin-right: 10px;
+            margin-right: 12px;
+            width: 16px;
+            height: 16px;
         }
+
+        &--item{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+
+    .MuiAccordion-root.Mui-expanded{
+        margin: 0;
+    }
+    
+    .MuiAccordionSummary-root.Mui-expanded{
+        min-height: initial;
+    }
+
+
+    .MuiAccordionSummary-root{
+        background-color: #3b3e66;
+        padding: 0;
+        min-height: initial;
+    }
+
+    .MuiAccordionSummary-content{
+        margin: 0;
+
+        &.Mui-expanded{
+            margin: 0;
+        }
+    }
+
+    .MuiCollapse-wrapperInner {
+        background-color: #3b3e66;
+    }
+
+    .MuiIconButton-edgeEnd{
+        margin-right: 0;
+        color: #fff;
+        position: absolute;
+        right: 0;
+    }
+
+    .MuiTypography-root{
+        width: 100%;
+    }
+
+    .MuiPaper-elevation1{
+        box-shadow: none;
     }
 }
 
@@ -172,6 +222,8 @@
             }
         }
     }
+
+
 }
 
 

@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react'
 import BreadcrumbsComponent from '../../components/BreadcrumbsComponent';
-import Header from '../../components/Header';
+// import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 
 type Props = {
@@ -11,7 +11,7 @@ export class MainComponent extends Component<Props> {
     render(){
         return (
             <div className='wrap-component'>
-                <Header />
+                {/* <Header /> */}
                 <Sidebar />
                 <div className='main-content'>
                     <div className="main-page">
