@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import HeaderIntro from '../../../../components/HeaderIntro';
 import logtimeService from '../../../../services/logtime.service';
 import { MainComponent } from '../../../Main';
@@ -74,14 +74,17 @@ const TimeSheetByTeam:React.FC<IProps> = (props) => {
     });
   }
 
-  const getLogtimeByTeam = () => {
-    logtimeService.getLogtimeByTeam(values, fromDay, toDay)
-    .then(res => setData(res.data))
-  }
+  const getLogtimeByTeam = useCallback(
+    () => {
+      logtimeService.getLogtimeByTeam(values, fromDay, toDay)
+      .then(res => setData(res.data))
+    },       
+    [values,fromDay,toDay]
+)
 
   useEffect(() => {
     getLogtimeByTeam();
-  }, [values, fromDay, toDay])
+  }, [values, fromDay, toDay, getLogtimeByTeam])
   
   return(
     <div>
