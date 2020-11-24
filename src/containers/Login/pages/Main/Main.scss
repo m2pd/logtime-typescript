@@ -4,14 +4,14 @@
     height: 100vh;
     background-image: url(../../../../assets/images/login-bg.jpg);
     background-repeat: no-repeat;
-    background-position: left;
-    background-size: calc(100% - 450px) 100vh;
+    background-position: right;
+    background-size: 100% 100vh;
     position: relative;
     object-fit: cover;
 
     /* z-index: 20; */
     .box-login {
-        width: 560px;
+        max-width: 560px;
         height: 100%;
         padding: 2rem;
         text-align: center;
@@ -49,5 +49,12 @@
         display: flex;
         align-items: center;
     }
+}
 
+@media (max-width: 768px) {
+    .login-page .box-login {
+        height: auto;
+        border-radius: 20px;
+        margin: 20px;
+    }
 }
