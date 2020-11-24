@@ -1,5 +1,9 @@
-.account-page-form .field{
-    display: flex;
-    margin: 10px 0;
-    width: 85%;
+.account-page-form {
+    max-width: 730px;
+    margin: 0 auto;
+    
+    .field{
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
 }

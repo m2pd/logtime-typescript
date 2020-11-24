@@ -65,7 +65,7 @@ const AccountsList:React.FC<IProps> = props => {
     },
     {
      name: "roles",
-     label: "Vài trò",
+     label: "Vai trò",
      options: {
       filter: true,
       sort: true,
@@ -94,7 +94,7 @@ const AccountsList:React.FC<IProps> = props => {
       options: {
         customBodyRender:(value:any, tableMeta:any, updateValue:any) => {
         return (
-          <div className={value ? "" : 'block'} style={{textAlign: 'center'}}>
+          <div className={value ? "" : 'block'} style={{textAlign: 'center', width: 90}}>
             <Fragment>
               <Button
                 variant="contained"
@@ -118,17 +118,11 @@ const AccountsList:React.FC<IProps> = props => {
     },
    ];
 
-  // const data = [
-  //   { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-  //   { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-  //   { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-  //   { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
-  // ];
-
 const options:any = {
   filterType: 'checkbox',
   selectableRows: 'none',
-  responsive: 'vertical ',
+  fixedHeader: true,
+  
   textLabels: {
     body: {
       noMatch: 'Không tìm thấy kết quả'

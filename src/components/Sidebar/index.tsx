@@ -11,7 +11,14 @@ import { UserCurrent } from '../../containers/Account/pages/Main';
 import avatar from '../../logo.svg';
 import './Sidebar.scss';
 
-function Sidebar(props:any) {
+interface IProps {
+    onChangeToggle : Function;
+    isShowMenu: Boolean;
+    currentUser: any;
+}
+
+function Sidebar(props:IProps) {
+    const {onChangeToggle, isShowMenu} = props;
     const [expanded, setExpanded] = React.useState<string | false>(false);
 
     const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
@@ -164,6 +171,9 @@ function Sidebar(props:any) {
 
                     {/* <AccordionComponent/> */}
                 </div>
+            </div>
+            <div className={`sidebar-icon menu-btn ${isShowMenu ? 'open' : ''}`} onClick={() => onChangeToggle()}>
+                <div className="menu-btn__burger"></div>
             </div>
         </div>
     )

@@ -7,7 +7,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import { User } from '../../../../constaints/interface';
 import './CardTeamItem.scss';
 import { useHistory } from 'react-router-dom';
@@ -28,6 +27,11 @@ const useStyles = makeStyles({
   paper: {
     marginRight: 15,
     fontFamily: 'Poppins',
+
+    "@media (max-width: 480px)": {
+      marginRight: 0,
+      marginBottom: 15,
+    }
   }
 });
 
@@ -37,7 +41,6 @@ const CardTeamItem: React.FC<IProps> = (props) => {
   const { card } = props;
   // console.log(card)
   return (
-    <Grid item xs={4} className="card">
       <Card className={classes.paper}>
         <CardActionArea>
           <CardMedia
@@ -79,7 +82,6 @@ const CardTeamItem: React.FC<IProps> = (props) => {
           </Button>
         </CardActions>
       </Card>
-    </Grid>
   )
 }
 

@@ -31,6 +31,7 @@ function InputFieldOnChange(props: PropsInputFieldOnChange) {
       fullWidth={fullWidth}
       disabled={disabled} 
       required={required} 
+      // InputProps={{inputProps: { min: value} }}
     />
   );
 }

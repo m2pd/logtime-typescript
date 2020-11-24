@@ -2,10 +2,6 @@
   .MuiTableCell-root {
     word-break: break-word;
     font-family: 'Poppins';
-
-    &:nth-of-type(4){
-        width: 200px;
-    }
   }
 
   .MuiTable-root{
@@ -81,4 +77,12 @@
       }
     }
   }
+}
+
+@media (max-width: 480px){
+  .register-page-form .btn-back {
+    margin-left: 0;
+    margin-top: 10px;
+    display: block;
+  } 
 }

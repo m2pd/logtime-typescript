@@ -21,6 +21,7 @@ export interface optionsValues{
 
 function MainLoginPage(props:IProps) {
     const {currentUser:{id, userRoles}, logtime} = props;
+    const isAdmin = userRoles.includes('Leader');
     const history = useHistory();
 
     // console.log(userRoles)
@@ -79,11 +80,15 @@ function MainLoginPage(props:IProps) {
  
     useEffect(() => {
         // onFetchLogtime();
-        onFetchAllUser();
+
+        //Call listUser only by admin, leader
+        if(isAdmin){
+            onFetchAllUser();
+        }
         onFetchLogTimeOnChange();
 
         // dispatch(getLogtime(idValues,fromDay,toDay))
-    }, [onFetchAllUser, onFetchLogTimeOnChange, idValues, fromDay, toDay])
+    }, [onFetchAllUser, onFetchLogTimeOnChange, idValues, fromDay, toDay, isAdmin])
 
 
     const getAllLogtime:any = logtime.logtimeCurrent;

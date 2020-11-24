@@ -1,12 +1,19 @@
 .page-form{
-  .MuiGrid-item{
-    &:not(:last-child){
-      margin-bottom: 1rem;
-    }
+
+  .field {
+    margin-bottom: 1.5rem;
+  }
+
+  #activity{
+      margin-bottom: 1.5rem;
   }
   
   .btn-timesheet{
     margin-right: 10px
+  }
+
+  #activity{
+    z-index: 10;
   }
 }
 

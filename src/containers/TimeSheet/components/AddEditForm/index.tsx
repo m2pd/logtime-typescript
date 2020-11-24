@@ -58,77 +58,78 @@ const AddEditForm:React.FC<IProps> = props =>{
           return(
             <Form className='page-form account-page-form'>
               <Grid container justify="center">
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   <FastField
                     name="date"
                     label="Thời gian"
                     type="date"
                     component={InputField}
-                    size="small"
+                    size="medium"
                     required={true}
                     disabled={!enableTextFiled}
                   />
                 </Grid>
 
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   <FastField
                       name="cost"
                       label="Số giờ"
                       type="number"
                       component={InputNumberFiled}
-                      size="small"
+                      size="medium"
                       required={true}
                       disabled={!enableTextFiled}
                   />
                 </Grid>
 
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   <FastField
                       name="title"
                       label="Công việc"
                       type="text"
                       component={InputField}
-                      size="small"
+                      size="medium"
                       required={true}
                       disabled={!enableTextFiled}
                   />
                 </Grid>
 
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   <FastField
                       name="projectTitle"
                       label="Dự án"
                       type="text"
                       component={InputField}
-                      size="small"
+                      size="medium"
                       required={true}
                       disabled={!enableTextFiled}
                   />
                 </Grid>
 
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   <FastField
                       name="description"
                       label="Mô tả"
                       type="text"
                       component={InputField}
-                      size="small"
+                      size="medium"
                       disabled={!enableTextFiled}
                   />
                 </Grid>
 
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   <FastField
+                      className="overtime"
                       name="overtime"
                       label="Hình thức"
                       component={RadioTimeSheetField}
-                      size="small"
+                      size="medium"
                       required={true}
                       disabled={!enableTextFiled}
                   />
                 </Grid>
                 
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   <FastField
                     name="activity"
                     className="timesheet-item select-field"
@@ -143,13 +144,13 @@ const AddEditForm:React.FC<IProps> = props =>{
                 </Grid>
                 {/* Show block TextFiled */}
                 {!enableTextFiled &&
-                  <Grid item xs={8}>
+                  <Grid item xs={12} lg={8}>
                     <FastField
                         name="comment"
                         label="Bình luận"
                         type="text"
                         component={InputField}
-                        size="small"
+                        size="medium"
                         disabled={!enableTextFiled}
                     />
                   </Grid>                
@@ -160,24 +161,24 @@ const AddEditForm:React.FC<IProps> = props =>{
                   // checkRoles('Admin' || 'Leader')
                   && (
                       <Fragment>
-                        <Grid item xs={8}>
+                        <Grid item xs={12} lg={8}>
                           <FastField
                               name="enable"
                               label="Khóa Logtime"
                               labelChild1="Đóng"
                               labelChild2="Mở"
                               component={RadioTimeSheetField}
-                              size="small"
+                              size="medium"
                               required={true}
                           />
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={12} lg={8}>
                           <FastField
                               name="comment"
                               label="Bình luận"
                               type="text"
                               component={InputField}
-                              size="small"
+                              size="medium"
                               disabled={!enableTextFiled}
                           />
                         </Grid>  
@@ -185,7 +186,7 @@ const AddEditForm:React.FC<IProps> = props =>{
                     )
                 }
 
-                <Grid item xs={8}>
+                <Grid item xs={12} lg={8}>
                   {enableTextFiled && 
                     <Button className="btn btn-timesheet" type='submit' variant='contained' color='primary'>
                       {isAddMode ? 'Thêm mới' : 'Cập nhật'}
