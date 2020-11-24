@@ -31,7 +31,7 @@ const MainDashBoardPage: React.FC<IProps> = (props) =>{
             intro='Chào mừng các bạn đến với MITECH WORKPLACE'
           />
           <div className="page-content">
-            <h1>MainDashBoardPage</h1>
+            <h1>Trang quản trị</h1>
           </div>
       </MainComponent>
     </div>
