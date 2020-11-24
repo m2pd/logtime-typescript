@@ -23,7 +23,7 @@ const AccountForm: React.FC<IProps> = (props) =>{
 																label="Tên đăng nhập"
 																type="text"
 																component={InputField}
-																size="small"
+																size="medium"
 																disabled={true}
 																variant='filled'
 														/>
@@ -32,28 +32,28 @@ const AccountForm: React.FC<IProps> = (props) =>{
 																label="Email"
 																type="email"
 																component={InputField}
-																size="small"
+																size="medium"
 														/>
 														<FastField
 																name="phoneNumber"
 																label="Số điện thoại"
 																type="text"
 																component={InputField}
-																size="small"
+																size="medium"
 														/>
 														<FastField
 																name="fullName"
 																label="Họ và tên"
 																type="text"
 																component={InputField}
-																size="small"
+																size="medium"
 														/>
 														<FastField
 																name="password"
 																label="Đổi mật khẩu"
 																type="password"
 																component={InputField}
-																size="small"
+																size="medium"
 														/>
 														<Button type='submit' variant='outlined' color='primary'>
 															Cập nhật

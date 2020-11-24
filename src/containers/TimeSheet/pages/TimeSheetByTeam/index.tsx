@@ -94,7 +94,6 @@ const TimeSheetByTeam:React.FC<IProps> = (props) => {
           intro='Trang thông tin các nhóm'
         />
         <div className="page-content">
-          <h1>Hello team</h1>
           <TimeSheetByTeamForm
            onHandleChange={onHandleChange}
            onGetDayStart={onGetDayStart}

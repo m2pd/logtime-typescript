@@ -30,18 +30,22 @@ const CardTeam:React.FC<IProps> = (props) => {
         {
           data.length > 0 
           ? data.map((card:any, index:number) => (
-            <div className="card-team" key={index}>
-              <CardTeamItem card={card.user} />
+            <Grid container className="card-team" key={index}>
+              <Grid item xs={12} sm={4} className="card">
+                <CardTeamItem card={card.user} /> 
+              </Grid>       
                 
-              <TimeSheetList
-               data={card.logtimes}
-               userRoles={userRoles}
-               showDefault={false}
-               onTimeSheetRemoveClick={onTimeSheetRemoveClick}
-               onTimeSheetViewDetailsClick={onTimeSheetViewDetailsClick}
-               onTimeSheetEditClick={onTimeSheetEditClick}
-              />
-            </div>
+              <Grid item xs={12} sm={8}>
+                <TimeSheetList
+                data={card.logtimes}
+                userRoles={userRoles}
+                showDefault={false}
+                onTimeSheetRemoveClick={onTimeSheetRemoveClick}
+                onTimeSheetViewDetailsClick={onTimeSheetViewDetailsClick}
+                onTimeSheetEditClick={onTimeSheetEditClick}
+                />
+              </Grid>
+            </Grid>
           ))
           : 'Chọn team đêuuuu'
         }

@@ -7,6 +7,8 @@
     height: 100%;
     left: 0;
     background-color: $background-primary;
+    transition: all 0.3s ease;
+    z-index: 2;
 
     &-header {
         border-bottom: 1px solid hsla(0,0%,100%,.5);
@@ -90,6 +92,72 @@
             width: 100%;
         }
     }
+
+    .menu-btn {
+        position: absolute;
+        bottom: 0;
+        left: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: calc(80px * var(--var-scale));
+        height: calc(80px * var(--var-scale));
+        border: calc(3px * var(--var-scale)) solid var(--var-color-primary);
+        box-shadow: 0 0 5px var(--var-color-shadows);
+        background-color: $background-primary;
+        cursor: pointer;
+        opacity: 0.2;
+        transition: all 0.3s ease-in-out;
+
+        &.open{
+            opacity: 1;
+        }
+      }
+      .menu-btn:hover {
+        box-shadow: 0 0 5px var(--var-color-shadows),
+          0 0 10px var(--var-color-shadows);
+        opacity: 1;
+      }
+      .menu-btn__burger {
+        width: calc(50px * var(--var-scale));
+        height: calc(6px * var(--var-scale));
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px var(--var-color-shadows);
+        transition: all 0.5s ease-in-out;
+      }
+      .menu-btn__burger::before,
+      .menu-btn__burger::after {
+        content: "";
+        position: absolute;
+        width: calc(50px * var(--var-scale));
+        height: calc(6px * var(--var-scale));
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px var(--var-color-shadows);
+        transition: all 0.5s ease-in-out;
+      }
+      .menu-btn__burger::before {
+        transform: translateY(calc(-16px * var(--var-scale)));
+      }
+      .menu-btn__burger::after {
+        transform: translateY(calc(16px * var(--var-scale)));
+      }
+      /* Animations */
+      .menu-btn.open .menu-btn__burger {
+        transform: translateX(calc(-50px * var(--var-scale)));
+        background: transparent;
+        box-shadow: none;
+      }
+      .menu-btn.open .menu-btn__burger::before {
+        /* transform: rotate(45deg) translate(35px, -35px); */
+        transform: translate(calc(50px * var(--var-scale))) rotate(45deg);
+      }
+      .menu-btn.open .menu-btn__burger::after {
+        /* transform: rotate(-45deg) translate(35px, 35px); */
+        transform: translate(calc(50px * var(--var-scale))) rotate(-45deg);
+      }
+      
 
     .MuiAccordion-root.Mui-expanded{
         margin: 0;
@@ -224,7 +292,7 @@
     }
 
 
-}
+} 
 
 
 

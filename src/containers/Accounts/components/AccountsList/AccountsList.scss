@@ -1,11 +1,14 @@
-.account-list{
+@import '../../../TimeSheet/components/TimeSheetList/TimeSheetList.scss';
 
-  .MuiTableCell-root{
-    word-break: break-word;
-    font-family: 'Poppins';
-  }
+.account-list{
   
   .MuiTable-root{
+
+    .MuiTableCell-root{
+      word-break: break-word;
+      font-family: 'Poppins';
+    }
+    
     th.MuiTableCell-root{
         background-color: #3c44b1;
         color:#fff;
@@ -20,18 +23,21 @@
   .MuiToolbar-regular {
       background-color: #fafafe;
   }
-
-  .MuiButton-root.btn-operation{
-    padding: 8px 10px;
-    min-width: 20px;
-  }
-  
-  .MuiButton-root.btn-operation--delete{
-    margin-right: 10px;
-  }
   
   .btn-operation .MuiButton-startIcon {
     margin-left: 0;
     margin-right: 0;
+  }
+}
+
+@media (max-width: 959px){
+  .account-list tbody td.MuiTableCell-root:first-child {
+    background-color: #f48079;
+    color: #fff;
+    display: flex;
+
+    p{
+      font-size: 30px;
+    }
   }
 }

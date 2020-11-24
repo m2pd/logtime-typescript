@@ -3,12 +3,23 @@
 //==================== ROOT =====================//
 $color-primary: #007cc2;
 $color-secondary: #da251c;
-$gutter: 260px;
+$gutter: 240px;
 $padding: 20px;
 
 $text-primary: hsla(0,0%,100%,.35);
 $background-primary: #3B3E66;
 
+$var-color-background: #111;
+$var-color-primary: #fff;
+$var-color-shadows: rgba(33, 150, 243, 0.5);
+$var-scale: 1;
+
+:root {
+    --var-color-background: #111;
+    --var-color-primary: #fff;
+    --var-color-shadows: rgba(33, 150, 243, 0.5);
+    --var-scale: 0.5;
+  }
 //=================================================//
 
 * {
@@ -132,8 +143,49 @@ a:hover{
     left: $gutter;
     background-color: beige;
     overflow-y:scroll;
+    transition: all 0.3s ease;
 }
 
 .page-content{
     padding: 50px 0;
+}
+
+.wrap-component.open{
+    .sidebar {
+        left: -$gutter;
+    }
+
+    .main-content {
+        width: 100%;
+        left: 0;
+    }
+};
+
+@media (max-width: 991px) {
+    .wrap-component{
+        .main-content {
+            width: 100%;
+            left: 0;
+        }
+    
+        .sidebar{
+            left: -$gutter;
+        }
+
+        &.open{
+            .sidebar{
+                left: 0;
+            }
+
+            &:after {
+                content: "";
+                width: 100%;
+                height: 100%;
+                background-color: #3f51b54d;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+    }
 }

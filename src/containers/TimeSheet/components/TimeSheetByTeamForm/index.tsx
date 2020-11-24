@@ -32,7 +32,7 @@ const TimeSheetByTeamForm : React.FC<IProps> = (props) => {
           return(
             <Form>
               <Grid container spacing={3}>
-                <Grid item md={3}>
+                <Grid item xs={6} lg={3}>
                   <FastField
                     className="timesheet-item"
                     name="FromDate"
@@ -43,7 +43,7 @@ const TimeSheetByTeamForm : React.FC<IProps> = (props) => {
                     size="small"
                   />
                 </Grid>
-                <Grid item md={3}>
+                <Grid item xs={6} lg={3}>
                   <FastField
                     className="timesheet-item"
                     name="ToDate"
@@ -54,7 +54,7 @@ const TimeSheetByTeamForm : React.FC<IProps> = (props) => {
                     size="small"
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={12} lg={6}>
                 <FastField
                     name="activity"
                     className="timesheet-item select-field"

@@ -85,7 +85,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
       customBodyRender:(value:any, tableMeta:any) => {
         const isBlock = tableMeta.rowData[8];
         return(
-          <div className={isBlock ? '' : 'block'} style={{ width: '150px' }}>
+          <div className={isBlock ? '' : 'block'} style={{ width: '100px' }}>
             {value}
           </div>
         );
@@ -99,7 +99,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
        customBodyRender:(value:any, tableMeta:any) => {
         const isBlock = tableMeta.rowData[8];
         return(
-          <div className={isBlock ? '' : 'block'} style={{ width: '150px' }}>
+          <div className={isBlock ? '' : 'block'} style={{ width: '100px' }}>
             {value}
           </div>
         );
@@ -116,7 +116,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
       customBodyRender:(value:any, tableMeta:any) => {
         const isBlock = tableMeta.rowData[8];
         return(
-          <div className={isBlock ? '' : 'block'}>
+          <div className={isBlock ? '' : 'block'} style={{ width: '100px' }}>
             {value}
           </div>
         );
@@ -129,7 +129,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
      options: {
       customBodyRender:(value:any) => {
         return(
-          <div style={{ width: '70px' }}>
+          <div>
             {value ? <Chip label="Làm thêm giờ"  color="secondary"/> : <Chip label="Thông thường"  color="primary" />}
           </div>
         );
@@ -157,7 +157,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
       options: {
         customBodyRender:(value:any, tableMeta:any, updateValue:any) => {
         return (
-          <div className={value ? '' : 'block'} style={{textAlign: 'center'}}>
+          <div className={value ? '' : 'block'} style={{textAlign: 'center', width: 90}}>
             {
               //Leader only show button Edit and Remove
               (( userRoles.includes('Leader') || value ))
@@ -198,7 +198,7 @@ const TimeSheetList:React.FC<IProps> = (props) => {
   const options:any = {
     filterType: 'dropdown',
     selectableRows: 'none',
-    responsive: "vertical",
+    responsive: "standard",
     fixedHeader: true,
     textLabels: {
       body: {

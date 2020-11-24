@@ -67,7 +67,6 @@ const MainAccountListPage: React.FC<IProps> = (props) =>{
             isButtonAdd={false}
           />
           <div className="page-content">
-            <h1>MainAccountListPage</h1>
             <AccountsList
               data={users.users}
               onAccountRemoveClick={handleAccountRemoveClick}

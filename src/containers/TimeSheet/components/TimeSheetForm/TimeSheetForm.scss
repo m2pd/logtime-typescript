@@ -2,11 +2,6 @@
   display: flex;
   justify-content: space-between;
 
-  .MuiFormControl-root,
-  #id{
-    flex: 0 0 40%
-  }
-
   #id{
     z-index: 9999;
   }
@@ -16,9 +11,6 @@
   margin: 1rem 0;
 }
 
-.timesheet-form.admin{
-  .MuiFormControl-root,
-  #id{
-    flex: 0 0 25%
-  }
+.MuiFormControl-root.MuiTextField-root.field {
+  width: 100%;
 }
